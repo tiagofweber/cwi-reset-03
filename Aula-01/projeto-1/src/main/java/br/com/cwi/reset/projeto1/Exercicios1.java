@@ -14,7 +14,7 @@ public class Exercicios1 {
     }
 
     public Double calcularMedia(List<Integer> numeros) {
-        return 10.0;
+        return (double) somarLista(numeros) / numeros.size();
     }
 
     public Integer obterMaiorNumero(List<Integer> numeros) {
