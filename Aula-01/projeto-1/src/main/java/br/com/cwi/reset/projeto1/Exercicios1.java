@@ -28,7 +28,12 @@ public class Exercicios1 {
     }
 
     public String obterPalavraInvertida(String palavra) {
-        return "edcba";
+        String palavraInvertida = "";
+
+        for (int i = palavra.length() - 1; i >= 0; i--) {
+            palavraInvertida += palavra.charAt(i);
+        }
+        return palavraInvertida;
     }
 
     public List<Integer> ordenarLista(List<Integer> numeros) {
