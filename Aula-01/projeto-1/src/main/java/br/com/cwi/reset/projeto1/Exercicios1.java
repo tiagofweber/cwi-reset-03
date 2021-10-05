@@ -6,7 +6,11 @@ import java.util.List;
 public class Exercicios1 {
 
     public Integer somarLista(List<Integer> numeros) {
-        return 10;
+        Integer soma = 0;
+        for(Integer numero : numeros) {
+            soma += numero;
+        }
+        return soma;
     }
 
     public Double calcularMedia(List<Integer> numeros) {
