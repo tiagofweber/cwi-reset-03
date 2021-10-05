@@ -37,7 +37,18 @@ public class Exercicios1 {
     }
 
     public List<Integer> ordenarLista(List<Integer> numeros) {
-        return Arrays.asList(1, 2, 3, 4, 5);
+        Integer[] ints = numeros.toArray(new Integer[numeros.size()]);
+        Integer aux;
+        for (int i = 0; i < numeros.size() - 1; i++) {
+            for (int j = i + 1; j < numeros.size(); j++) {
+                if (ints[j] < ints[i]) {
+                    aux = ints[j];
+                    ints[j] = ints[i];
+                    ints[i] = aux;
+                }
+            }
+        }
+        return Arrays.asList(ints);
     }
 }
 
