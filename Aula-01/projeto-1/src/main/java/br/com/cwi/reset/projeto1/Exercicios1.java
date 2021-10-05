@@ -18,7 +18,13 @@ public class Exercicios1 {
     }
 
     public Integer obterMaiorNumero(List<Integer> numeros) {
-        return 10;
+        Integer maiorNumero = 0;
+        for (Integer numero : numeros) {
+            if (numero > maiorNumero) {
+                maiorNumero = numero;
+            }
+        }
+        return maiorNumero;
     }
 
     public String obterPalavraInvertida(String palavra) {
