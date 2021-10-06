@@ -32,6 +32,18 @@ public class Registradora {
             }
         }
 
+        if ("pao".equals(item)) {
+            ItensPorQuantidade.pao -= quantidade;
+        } else if ("torta".equals(item)) {
+            ItensPorQuantidade.fatiasDeTorta -= quantidade;
+        } else if ("sanduiche".equals(item)) {
+            ItensPorQuantidade.sanduiche -= quantidade;
+        } else if ("leite".equals(item)) {
+            ItensPorQuantidade.leite -= quantidade;
+        } else if ("cafe".equals(item)) {
+            ItensPorQuantidade.cafe -= quantidade;
+        }
+
         return precoItem;
     }
 
