@@ -9,9 +9,9 @@ public class RelacaoPesoPreco {
             precoTotal = 96.00 * (qtd / 16);
         } else if ("leite".equals(item)) {
             precoTotal = 4.48 * qtd;
-        } else if ("café".equals(item)) {
+        } else if ("cafe".equals(item)) {
             precoTotal = 9.56 * qtd;
-        } else if ("sanduba".equals(item)) {
+        } else if ("sanduiche".equals(item)) {
             precoTotal = 4.5 * qtd;
         }
 
