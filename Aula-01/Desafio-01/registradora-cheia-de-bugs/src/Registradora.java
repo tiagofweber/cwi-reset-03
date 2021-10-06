@@ -35,7 +35,7 @@ public class Registradora {
     }
 
     private static void primeiroBug() {
-        DataProjeto.criarDataComCozinhaFuncionando();
+        DataProjeto data = DataProjeto.criarDataComCozinhaFuncionando();
         String item = "sanduiche";
         int quantidade = 4;
 
