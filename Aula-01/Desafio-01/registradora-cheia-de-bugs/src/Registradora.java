@@ -18,9 +18,12 @@ public class Registradora {
     private static double registrarItem(String item, int quantidade) {
         double precoItem = RelacaoPesoPreco.retornaPrecoProduto(item, quantidade);
 
+        boolean vendaConcluida = true;
+
         if (QuantidadeMinimaItem.precisaReposicao(item)) {
             if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
                 if (!DataProjeto.cozinhaEmFuncionamento()) {
+                    vendaConcluida = false;
                     System.out.println("Cozinha fechada!");
                     System.out.println("Reposição de " + item + " indisponível.");
                     if ("pao".equals(item)) {
@@ -40,16 +43,18 @@ public class Registradora {
             }
         }
 
-        if ("pao".equals(item)) {
-            ItensPorQuantidade.pao -= quantidade;
-        } else if ("torta".equals(item)) {
-            ItensPorQuantidade.fatiasDeTorta -= quantidade;
-        } else if ("sanduiche".equals(item)) {
-            ItensPorQuantidade.sanduiche -= quantidade;
-        } else if ("leite".equals(item)) {
-            ItensPorQuantidade.leite -= quantidade;
-        } else if ("cafe".equals(item)) {
-            ItensPorQuantidade.cafe -= quantidade;
+        if (vendaConcluida) {
+            if ("pao".equals(item)) {
+                ItensPorQuantidade.pao -= quantidade;
+            } else if ("torta".equals(item)) {
+                ItensPorQuantidade.fatiasDeTorta -= quantidade;
+            } else if ("sanduiche".equals(item)) {
+                ItensPorQuantidade.sanduiche -= quantidade;
+            } else if ("leite".equals(item)) {
+                ItensPorQuantidade.leite -= quantidade;
+            } else if ("cafe".equals(item)) {
+                ItensPorQuantidade.cafe -= quantidade;
+            }
         }
 
         return precoItem;
