@@ -24,6 +24,7 @@ public class Registradora {
             if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
                 if (!DataProjeto.cozinhaEmFuncionamento()) {
                     vendaConcluida = false;
+                    precoItem = 0;
                     System.out.println("Cozinha fechada!");
                     System.out.println("Reposição de " + item + " indisponível.");
                     if ("pao".equals(item)) {
@@ -58,6 +59,7 @@ public class Registradora {
         }
 
         return precoItem;
+
     }
 
     private static void primeiroBug() {
@@ -127,7 +129,9 @@ public class Registradora {
 
         double precoTotal = registrarItem(item, quantidade);
 
-        System.out.println(String.format("Valor total: %.2f", precoTotal));
+        if (precoTotal != 0) {
+            System.out.println(String.format("Valor total: %.2f", precoTotal));
+        }
 
         // Cliente 2
         String item2 = "sanduiche";
@@ -135,7 +139,11 @@ public class Registradora {
 
         double precoTotal2 = registrarItem(item2, quantidade2);
 
-        System.out.println(String.format("Valor total: %.2f", precoTotal2));
+        if (precoTotal2 != 0) {
+            System.out.println(String.format("Valor total: %.2f", precoTotal2));
+        }
+
+
     }
 
 }
