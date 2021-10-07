@@ -1,26 +1,29 @@
 public class QuantidadeMinimaItem {
 
-    public static boolean precisaReposicao(String item) {
+    public static boolean precisaReposicao(String item, int quantidade) {
+        boolean fazerReposição = false;
+
         if ("pao".equals(item)) {
-            return ItensPorQuantidade.pao < 600;
+            if (ItensPorQuantidade.pao < 600 || (ItensPorQuantidade.pao - quantidade) <= 0)
+            fazerReposição = true;
+        } else if ("torta".equals(item)) {
+            if (ItensPorQuantidade.fatiasDeTorta < 10 || (ItensPorQuantidade.fatiasDeTorta - quantidade) <= 0) {
+                fazerReposição = true;
+            }
+        } else if ("sanduiche".equals(item)) {
+            if (ItensPorQuantidade.sanduiche < 10 || (ItensPorQuantidade.sanduiche - quantidade) < 0) {
+                fazerReposição = true;
+            }
+        } else if ("cafe".equals(item)) {
+            if (ItensPorQuantidade.cafe < 10 || (ItensPorQuantidade.cafe - quantidade) <= 0) {
+                fazerReposição = true;
+            }
+        } else if ("leite".equals(item)) {
+            if (ItensPorQuantidade.leite < 10 || (ItensPorQuantidade.leite - quantidade) <= 0) {
+                fazerReposição = true;
+            }
         }
 
-        if ("torta".equals(item)) {
-            return ItensPorQuantidade.fatiasDeTorta < 10;
-        }
-
-        if ("sanduiche".equals(item)) {
-            return ItensPorQuantidade.sanduiche <= 1;
-        }
-
-        if ("cafe".equals(item)) {
-            return ItensPorQuantidade.leite < 12;
-        }
-
-        if ("leite".equals(item)) {
-            return ItensPorQuantidade.cafe < 12;
-        }
-
-        return false;
+        return fazerReposição;
     }
 }

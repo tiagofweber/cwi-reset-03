@@ -6,13 +6,13 @@ public class Registradora {
 
 //        segundoBug();
 
-//        terceiroBug();
+        terceiroBug();
 
 //        quartoBug();
 
 //        quintoBug();
 
-          sextoBug();
+//        sextoBug();
     }
 
     private static double registrarItem(String item, int quantidade) {
@@ -20,7 +20,7 @@ public class Registradora {
 
         boolean vendaConcluida = true;
 
-        if (QuantidadeMinimaItem.precisaReposicao(item)) {
+        while (QuantidadeMinimaItem.precisaReposicao(item, quantidade)) {
             if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
                 if (!DataProjeto.cozinhaEmFuncionamento()) {
                     vendaConcluida = false;
@@ -34,6 +34,7 @@ public class Registradora {
                     } else if ("torta".equals(item)) {
                         System.out.println("A quantidade restante em estoque é " + ItensPorQuantidade.fatiasDeTorta + ".");
                     }
+                    break;
                 } else {
                     ReposicaoCozinha.reporItem(item);
                 }
