@@ -38,9 +38,7 @@ public class Registradora {
                 } else {
                     ReposicaoCozinha.reporItem(item);
                 }
-            }
-
-            if ("leite".equals(item) || "cafe".equals(item)) {
+            } else if ("leite".equals(item) || "cafe".equals(item)) {
                 ReposicaoFornecedor.reporItem(item);
             }
         }
