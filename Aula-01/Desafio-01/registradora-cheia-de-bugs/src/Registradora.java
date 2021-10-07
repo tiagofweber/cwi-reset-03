@@ -6,13 +6,13 @@ public class Registradora {
 
 //        segundoBug();
 
-        terceiroBug();
+//        terceiroBug();
 
 //        quartoBug();
 
 //        quintoBug();
 
-//        sextoBug();
+        sextoBug();
     }
 
     private static double registrarItem(String item, int quantidade) {
@@ -46,17 +46,7 @@ public class Registradora {
         }
 
         if (vendaConcluida) {
-            if ("pao".equals(item)) {
-                ItensPorQuantidade.pao -= quantidade;
-            } else if ("torta".equals(item)) {
-                ItensPorQuantidade.fatiasDeTorta -= quantidade;
-            } else if ("sanduiche".equals(item)) {
-                ItensPorQuantidade.sanduiche -= quantidade;
-            } else if ("leite".equals(item)) {
-                ItensPorQuantidade.leite -= quantidade;
-            } else if ("cafe".equals(item)) {
-                ItensPorQuantidade.cafe -= quantidade;
-            }
+            ItensPorQuantidade.removerItens(item, quantidade);
         }
 
         return precoItem;
