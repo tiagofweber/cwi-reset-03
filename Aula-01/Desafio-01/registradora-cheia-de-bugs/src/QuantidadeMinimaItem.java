@@ -11,15 +11,15 @@ public class QuantidadeMinimaItem {
                 fazerReposição = true;
             }
         } else if ("sanduiche".equals(item)) {
-            if (ItensPorQuantidade.sanduiche < 10 || (ItensPorQuantidade.sanduiche - quantidade) < 0) {
+            if (ItensPorQuantidade.sanduiche <= 1 || (ItensPorQuantidade.sanduiche - quantidade) < 0) {
                 fazerReposição = true;
             }
         } else if ("cafe".equals(item)) {
-            if (ItensPorQuantidade.cafe < 10 || (ItensPorQuantidade.cafe - quantidade) <= 0) {
+            if (ItensPorQuantidade.cafe < 12 || (ItensPorQuantidade.cafe - quantidade) <= 0) {
                 fazerReposição = true;
             }
         } else if ("leite".equals(item)) {
-            if (ItensPorQuantidade.leite < 10 || (ItensPorQuantidade.leite - quantidade) <= 0) {
+            if (ItensPorQuantidade.leite < 12 || (ItensPorQuantidade.leite - quantidade) <= 0) {
                 fazerReposição = true;
             }
         }
