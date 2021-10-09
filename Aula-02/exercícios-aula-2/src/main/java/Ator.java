@@ -1,21 +1,10 @@
-public class Ator {
+public class Ator extends Pessoa {
 
-    private String nome;
-    private Integer idade;
     private Integer qtdOscarsVencidos;
-    private Genero genero;
 
-    public Ator(String nome, Integer idade, Integer qtdOscarsVencidos, Genero genero) {
-        this.nome = nome;
-        this.idade = idade;
+    public Ator(String nome, Integer idade, Genero genero, Integer qtdOscarsVencidos) {
+        super(nome, idade, genero);
         this.qtdOscarsVencidos = qtdOscarsVencidos;
-        this.genero = genero;
-    }
-
-    public void apresentar() {
-        System.out.println("Nome: " + nome);
-        System.out.println("Idade: " + idade);
-        System.out.println("Gênero: " + genero.getDescricao());
     }
 
 }
