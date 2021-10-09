@@ -4,5 +4,5 @@ public class Ator {
     private Integer idade;
     private Integer qtdOscarsVencidos;
 
-    
+
 }
