@@ -1,13 +1,13 @@
 public class Diretor  extends Pessoa {
 
-    private int qtdFilmesDirigidos;
+    private Integer qtdFilmesDirigidos;
 
-    public Diretor(String nome, Integer idade, Genero genero, int qtdFilmesDirigidos) {
+    public Diretor(String nome, Integer idade, Genero genero, Integer qtdFilmesDirigidos) {
         super(nome, idade, genero);
         this.qtdFilmesDirigidos = qtdFilmesDirigidos;
     }
 
-    public int getQtdFilmesDirigidos() {
+    public Integer getQtdFilmesDirigidos() {
         return qtdFilmesDirigidos;
     }
 }
