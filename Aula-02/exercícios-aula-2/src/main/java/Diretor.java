@@ -8,4 +8,8 @@ public class Diretor {
         this.idade = idade;
         this.qtdFilmesDirigidos = qtdFilmesDirigidos;
     }
+
+    public String getNome() {
+        return nome;
+    }
 }

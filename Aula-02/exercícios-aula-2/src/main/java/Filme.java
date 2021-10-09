@@ -1,4 +1,5 @@
 public class Filme {
+
     private String nome;
     private String descricao;
     private int duracao;
@@ -19,6 +20,7 @@ public class Filme {
         System.out.println("Nome: " + this.nome);
         System.out.println("Descrição: " + this.descricao);
         System.out.println("Duração: " + this.duracao);
+        System.out.println("Diretor:" + this.diretor.getNome());
     }
 
 }
