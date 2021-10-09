@@ -23,7 +23,7 @@ public class Filme {
         System.out.println("Diretor:" + this.diretor.getNome());
     }
 
-    public void setAvaliacao(Integer avaliacao) {
+    public void setAvaliacao(Integer avaliacao) throws AvaliacaoForaDoPadraoException {
         if (avaliacao < 1 || avaliacao > 5) {
             throw new AvaliacaoForaDoPadraoException();
         }
