@@ -2,6 +2,7 @@ public class Diretor {
     private String nome;
     private int idade;
     private int qtdFilmesDirigidos;
+    private Genero genero;
 
     public Diretor(String nome, int idade, int qtdFilmesDirigidos) {
         this.nome = nome;
