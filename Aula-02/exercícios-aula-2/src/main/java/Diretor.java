@@ -8,6 +8,7 @@ public class Diretor {
         this.nome = nome;
         this.idade = idade;
         this.qtdFilmesDirigidos = qtdFilmesDirigidos;
+        this.genero = genero;
     }
 
     public String getNome() {
@@ -17,6 +18,6 @@ public class Diretor {
     public void apresentar() {
         System.out.println("Nome: " + nome);
         System.out.println("Idade: " + idade);
-        System.out.println("Gênero: " + genero);
+        System.out.println("Gênero: " + genero.getDescricao());
     }
 }

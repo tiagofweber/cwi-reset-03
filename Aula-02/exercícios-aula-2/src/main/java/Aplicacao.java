@@ -22,5 +22,7 @@ public class Aplicacao {
 
         filme1.reproduzirFilme();
         filme2.reproduzirFilme();
+
+        diretor1.apresentar();
     }
 }

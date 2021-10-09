@@ -15,7 +15,7 @@ public class Ator {
     public void apresentar() {
         System.out.println("Nome: " + nome);
         System.out.println("Idade: " + idade);
-        System.out.println("Gênero: " + genero);
+        System.out.println("Gênero: " + genero.getDescricao());
     }
 
 }
