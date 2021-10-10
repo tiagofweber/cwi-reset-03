@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Pessoa {
 
@@ -14,8 +15,12 @@ public class Pessoa {
 
     public void apresentar() {
         System.out.println("Nome: " + nome);
-        System.out.println("Idade: " + dataDeNascimento);
+        System.out.println("Idade: " + this.calcularIdade());
         System.out.println("Gênero: " + genero.getDescricao());
+    }
+
+    public Integer calcularIdade() {
+        return Period.between(dataDeNascimento, LocalDate.now()).getYears();
     }
 
     public String getNome() {

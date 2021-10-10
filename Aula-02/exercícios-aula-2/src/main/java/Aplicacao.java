@@ -27,7 +27,7 @@ public class Aplicacao {
 
         Ator ator1 = new Ator("Will Smith", LocalDate.of(1974, 9, 15), Genero.MASCULINO, 11);
 
-//        diretor1.apresentar();
-//        ator1.apresentar();
+        diretor1.apresentar();
+        ator1.apresentar();
     }
 }
