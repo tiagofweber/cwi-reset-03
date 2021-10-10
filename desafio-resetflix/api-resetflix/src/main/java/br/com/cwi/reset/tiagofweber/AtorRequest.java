@@ -15,7 +15,7 @@ public class AtorRequest {
         this.statusCarreira = statusCarreira;
         this.anoInicioAtividade = anoInicioAtividade;
 
-        Ator ator = new Ator(1, this.nome, this.dataNascimento, this.anoInicioAtividade, this.statusCarreira);
+        Ator ator = new Ator(1, this.nome, this.dataNascimento, this.statusCarreira, this.anoInicioAtividade);
     }
 
     public String getNome() {
