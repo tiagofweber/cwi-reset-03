@@ -21,11 +21,11 @@ public class Aplicacao {
         );
 
         // filme1.reproduzirFilme();
-        // filme2.reproduzirFilme();
+         filme2.reproduzirFilme();
 
         Ator ator1 = new Ator("Will Smith", 49, Genero.MASCULINO, 11);
 
-        diretor1.apresentar();
-        ator1.apresentar();
+//        diretor1.apresentar();
+//        ator1.apresentar();
     }
 }

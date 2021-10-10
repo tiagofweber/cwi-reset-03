@@ -2,17 +2,22 @@ public class Filme {
 
     private String nome;
     private String descricao;
-    private int duracao;
-    private int anoDeLancamento;
-    private int avaliacao;
+    private Integer duracao;
+    private Integer anoDeLancamento;
+    private Integer avaliacao;
     private Diretor diretor;
 
-    public Filme(String nome, String descricao, int duracao, int anoDeLancamento, int avaliacao, Diretor diretor) {
+    public Filme(String nome, String descricao, Integer duracao, Integer anoDeLancamento, Integer avaliacao, Diretor diretor) {
         this.nome = nome;
         this.descricao = descricao;
         this.duracao = duracao;
         this.anoDeLancamento = anoDeLancamento;
-        this.setAvaliacao(avaliacao);
+        try {
+            this.setAvaliacao(avaliacao);
+        } catch (AvaliacaoForaDoPadraoException e) {
+            System.out.println(e.getMessage());
+        }
+
         this.diretor = diretor;
     }
 
