@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Aplicacao {
     public static void main(String args[]) {
@@ -21,13 +23,37 @@ public class Aplicacao {
                 5,
                 diretor2
         );
+        Filme filme3 = new Filme(
+                "Old Guard",
+                "Quatro guerreiros com o dom da imortalidade...",
+                125,
+                2020,
+                4,
+                diretor1
+        );
+        Filme filme4 = new Filme(
+                "Harry Potter e a Ordem da Fênix",
+                "A ordem da fênix foi uma organização fundada por Alvo Dumbledore...",
+                170,
+                2007,
+                5,
+                diretor2
+        );
 
-        // filme1.reproduzirFilme();
-         filme2.reproduzirFilme();
+        List<Filme> filmes = new ArrayList<>();
 
-        Ator ator1 = new Ator("Will Smith", LocalDate.of(1974, 9, 15), Genero.MASCULINO, 11);
+        filmes.add(filme1);
+        filmes.add(filme2);
+        filmes.add(filme3);
+        filmes.add(filme4);
 
-        diretor1.apresentar();
-        ator1.apresentar();
+        for (Filme filme: filmes) {
+            filme.reproduzirFilme();
+        }
+
+//        Ator ator1 = new Ator("Will Smith", LocalDate.of(1974, 9, 15), Genero.MASCULINO, 11);
+
+//        diretor1.apresentar();
+//        ator1.apresentar();
     }
 }
