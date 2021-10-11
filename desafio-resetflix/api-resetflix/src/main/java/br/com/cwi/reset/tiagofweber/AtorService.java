@@ -9,4 +9,9 @@ public class AtorService {
     }
 
     // Demais métodos da classe
+    public void criarAtor(AtorRequest atorRequest) {
+
+        Ator ator = new Ator(1, atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
+        fakeDatabase.persisteAtor(atorRequest);
+    }
 }
