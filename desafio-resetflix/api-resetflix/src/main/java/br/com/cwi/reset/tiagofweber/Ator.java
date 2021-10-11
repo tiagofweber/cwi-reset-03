@@ -37,4 +37,15 @@ public class Ator {
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
     }
+
+    @Override
+    public String toString() {
+        return "Ator{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", statusCarreira=" + statusCarreira +
+                ", anoInicioAtividade=" + anoInicioAtividade +
+                '}';
+    }
 }

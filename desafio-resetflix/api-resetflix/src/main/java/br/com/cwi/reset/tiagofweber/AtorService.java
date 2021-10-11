@@ -11,7 +11,9 @@ public class AtorService {
     // Demais métodos da classe
     public void criarAtor(AtorRequest atorRequest) {
 
-        Ator ator = new Ator(1, atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
+        Integer novoId = fakeDatabase.recuperaAtores().size() + 1;
+
+        Ator ator = new Ator(novoId, atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
         fakeDatabase.persisteAtor(ator);
     }
 }
