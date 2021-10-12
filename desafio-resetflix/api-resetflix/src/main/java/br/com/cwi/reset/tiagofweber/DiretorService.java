@@ -1,6 +1,7 @@
 package br.com.cwi.reset.tiagofweber;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DiretorService {
@@ -47,5 +48,30 @@ public class DiretorService {
 
         fakeDatabase.persisteDiretor(diretor);
 
+    }
+
+    public List<Diretor> listarDiretores(String filtroNome) throws DiretorNaoCadastradoException {
+        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+        List<Diretor> diretoresFiltrados = new ArrayList<>();
+
+        if (diretores.size() == 0) {
+            throw new DiretorNaoCadastradoException("Nenhum diretor cadastrado, favor cadastrar diretores.");
+        }
+
+        for (Diretor diretor: diretores) {
+            if (filtroNome.equals("")) {
+                diretoresFiltrados.add(diretor);
+            } else {
+                if (diretor.getNome().contains(filtroNome)) {
+                    diretoresFiltrados.add(diretor);
+                }
+            }
+        }
+
+        if (diretoresFiltrados.size() == 0) {
+            throw new DiretorNaoCadastradoException(String.format("Diretor não encontrado com filtro %s, favor informar outro filtro", filtroNome));
+        }
+
+        return diretoresFiltrados;
     }
 }

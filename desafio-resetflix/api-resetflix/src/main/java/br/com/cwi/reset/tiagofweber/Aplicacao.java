@@ -125,13 +125,15 @@ public class Aplicacao {
             System.out.println(e.getMessage());
         }
 
-        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+        /*** Testa listar diretores por filtro ***/
+        try {
+            List<Diretor> diretores = diretorService.listarDiretores("");
 
-        System.out.println("Quantidade de diretores cadastrados: " + diretores.size());
-
-        for (Diretor diretor: diretores) {
-            System.out.println(diretor.toString());
+            for (Diretor diretor: diretores) {
+                System.out.println(diretor.toString());
+            }
+        } catch (DiretorNaoCadastradoException e) {
+            System.out.println(e.getMessage());
         }
-
     }
 }
