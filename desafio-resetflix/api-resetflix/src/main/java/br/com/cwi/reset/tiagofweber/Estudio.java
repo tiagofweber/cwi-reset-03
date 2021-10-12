@@ -17,4 +17,24 @@ public class Estudio {
         this.dataCriacao = dataCriacao;
         this.statusAtividade = statusAtividade;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public StatusAtividade getStatusAtividade() {
+        return statusAtividade;
+    }
 }
