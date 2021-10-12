@@ -10,7 +10,7 @@ public class DiretorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException {
+    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException, AnoInicioAtividadeInvalidoException {
 
         Integer novoId = fakeDatabase.recuperaDiretores().size() + 1;
 
@@ -30,6 +30,10 @@ public class DiretorService {
 
         if (diretor.getDataNascimento().isAfter(LocalDate.now())) {
             throw new DataNascimentoInvalidaException("diretores");
+        }
+
+        if (diretor.getAnoInicioAtividade() <= diretor.getDataNascimento().getYear()) {
+            throw new AnoInicioAtividadeInvalidoException("diretor");
         }
 
         fakeDatabase.persisteDiretor(diretor);

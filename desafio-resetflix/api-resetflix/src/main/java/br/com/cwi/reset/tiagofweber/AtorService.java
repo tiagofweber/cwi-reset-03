@@ -38,7 +38,7 @@ public class AtorService {
         }
 
         if (ator.getAnoInicioAtividade() <= ator.getDataNascimento().getYear()) {
-            throw new AnoInicioAtividadeInvalidoException();
+            throw new AnoInicioAtividadeInvalidoException("ator");
         }
 
         List<Ator> atores = fakeDatabase.recuperaAtores();

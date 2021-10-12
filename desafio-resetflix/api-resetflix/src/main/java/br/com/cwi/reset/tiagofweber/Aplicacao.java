@@ -103,25 +103,25 @@ public class Aplicacao {
 
         DiretorRequest diretorRequest3 = new DiretorRequest(
                 "Martin Scorsese",
-                LocalDate.of(2021, Month.NOVEMBER, 17),
+                LocalDate.of(1942, Month.NOVEMBER, 17),
                 1968
         );
 
         try {
             diretorService.cadastrarDiretor(diretorRequest);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest2);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest3);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
