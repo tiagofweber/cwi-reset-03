@@ -23,4 +23,36 @@ public class Filme {
         this.personagens = personagens;
         this.resumo = resumo;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Integer getAnoLancamento() {
+        return anoLancamento;
+    }
+
+    public String getCapaFilme() {
+        return capaFilme;
+    }
+
+    public List<Genero> getGeneros() {
+        return generos;
+    }
+
+    public Diretor getDiretor() {
+        return diretor;
+    }
+
+    public List<PersonagemAtor> getPersonagens() {
+        return personagens;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
 }
