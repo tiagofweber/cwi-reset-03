@@ -1,6 +1,7 @@
 package br.com.cwi.reset.tiagofweber;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class AtorService {
 
@@ -11,7 +12,7 @@ public class AtorService {
     }
 
     // Demais métodos da classe
-    public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException {
+    public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException, AnoInicioAtividadeInvalidoException {
 
         Integer novoId = fakeDatabase.recuperaAtores().size() + 1;
         LocalDate dataAtual = LocalDate.now();
@@ -36,6 +37,12 @@ public class AtorService {
             throw new DataNascimentoInvalidaException();
         }
 
+        if (ator.getAnoInicioAtividade() <= ator.getDataNascimento().getYear()) {
+            throw new AnoInicioAtividadeInvalidoException();
+        }
+
         fakeDatabase.persisteAtor(ator);
     }
+
+    
 }

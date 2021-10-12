@@ -25,7 +25,7 @@ public class Aplicacao {
 
         try {
             atorService.criarAtor(atorRequest);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
