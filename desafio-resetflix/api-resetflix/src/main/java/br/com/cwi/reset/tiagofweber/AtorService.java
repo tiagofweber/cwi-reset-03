@@ -44,5 +44,7 @@ public class AtorService {
         fakeDatabase.persisteAtor(ator);
     }
 
-    
+    public List<Ator> consultarAtores() {
+        return fakeDatabase.recuperaAtores();
+    }
 }
