@@ -52,7 +52,7 @@ public class AtorService {
         fakeDatabase.persisteAtor(ator);
     }
 
-    public Ator consultarAtor(Integer id) throws CampoObrigatorioNaoInformadoException {
+    public Ator consultarAtor(Integer id) throws CampoObrigatorioNaoInformadoException, AtorNaoCadastradoException {
         if (id == null) {
             throw new CampoObrigatorioNaoInformadoException("id");
         }
@@ -62,6 +62,9 @@ public class AtorService {
             if (ator.getId().equals(id)) {
                 atorEncontrado = ator;
             }
+        }
+        if (atorEncontrado == null) {
+            throw new AtorNaoCadastradoException(id);
         }
         return atorEncontrado;
     }

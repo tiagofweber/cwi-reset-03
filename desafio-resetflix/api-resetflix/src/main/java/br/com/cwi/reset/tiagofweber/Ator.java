@@ -19,14 +19,6 @@ public class Ator {
         this.anoInicioAtividade = anoInicioAtividade;
     }
 
-    public Integer calcularIdade() {
-        dataNascimento = this.dataNascimento;
-        LocalDate dataAtual = LocalDate.now();
-        Period periodo = Period.between(dataNascimento, dataAtual);
-        System.out.println(periodo.getYears());
-        return periodo.getYears();
-    }
-
     public Integer getId() {
         return id;
     }

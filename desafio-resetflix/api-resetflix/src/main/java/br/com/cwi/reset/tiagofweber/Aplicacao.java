@@ -66,8 +66,8 @@ public class Aplicacao {
 
         // Teste de consultar ator
         try {
-            System.out.println(atorService.consultarAtor(null));
-        } catch (CampoObrigatorioNaoInformadoException e) {
+            System.out.println(atorService.consultarAtor(3));
+        } catch (CampoObrigatorioNaoInformadoException | AtorNaoCadastradoException e) {
             System.out.println(e.getMessage());
         }
 
