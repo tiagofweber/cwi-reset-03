@@ -109,19 +109,19 @@ public class Aplicacao {
 
         try {
             diretorService.cadastrarDiretor(diretorRequest);
-        } catch (CampoObrigatorioNaoInformadoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest2);
-        } catch (CampoObrigatorioNaoInformadoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest3);
-        } catch (CampoObrigatorioNaoInformadoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException e) {
             System.out.println(e.getMessage());
         }
 

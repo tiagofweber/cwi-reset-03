@@ -8,7 +8,7 @@ public class DiretorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoObrigatorioNaoInformadoException {
+    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException {
 
         Integer novoId = fakeDatabase.recuperaDiretores().size() + 1;
 
@@ -20,6 +20,10 @@ public class DiretorService {
             throw new CampoObrigatorioNaoInformadoException("data de nascimento");
         } else if (diretor.getAnoInicioAtividade() == null) {
             throw new CampoObrigatorioNaoInformadoException("ano inicio atividade");
+        }
+
+        if (!diretor.getNome().contains(" ")) {
+            throw new NomeIncompletoException();
         }
 
         fakeDatabase.persisteDiretor(diretor);
