@@ -1,6 +1,7 @@
 package br.com.cwi.reset.tiagofweber;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class DiretorService {
 
@@ -10,7 +11,7 @@ public class DiretorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException, AnoInicioAtividadeInvalidoException {
+    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException, AnoInicioAtividadeInvalidoException, NomeInvalidoException {
 
         Integer novoId = fakeDatabase.recuperaDiretores().size() + 1;
 
@@ -34,6 +35,14 @@ public class DiretorService {
 
         if (diretor.getAnoInicioAtividade() <= diretor.getDataNascimento().getYear()) {
             throw new AnoInicioAtividadeInvalidoException("diretor");
+        }
+
+        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+
+        for (Diretor diretorCadastrado: diretores) {
+            if (diretorCadastrado.getNome().equals(diretor.getNome())) {
+                throw new NomeInvalidoException("diretor", diretor.getNome());
+            }
         }
 
         fakeDatabase.persisteDiretor(diretor);

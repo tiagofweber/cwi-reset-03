@@ -109,19 +109,19 @@ public class Aplicacao {
 
         try {
             diretorService.cadastrarDiretor(diretorRequest);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest2);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest3);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 

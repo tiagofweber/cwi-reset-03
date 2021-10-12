@@ -45,7 +45,7 @@ public class AtorService {
 
         for (Ator atorCadastrado: atores) {
             if (atorCadastrado.getNome().equals(ator.getNome())) {
-                throw new NomeInvalidoException(ator.getNome());
+                throw new NomeInvalidoException("ator", ator.getNome());
             }
         }
 
