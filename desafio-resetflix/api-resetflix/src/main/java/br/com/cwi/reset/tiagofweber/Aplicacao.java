@@ -23,8 +23,13 @@ public class Aplicacao {
         Integer anoInicioAtividade2 = 1997;
         AtorRequest atorRequest2 = new AtorRequest(nome2, dataNascimento2, statusCarreira2, anoInicioAtividade2);
 
-        atorService.criarAtor(atorRequest);
-        atorService.criarAtor(atorRequest2);
+        try {
+            atorService.criarAtor(atorRequest);
+        } catch (CampoObrigatorioNaoInformadoException e) {
+            System.out.println(e.getMessage());
+        }
+
+//        atorService.criarAtor(atorRequest2);
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
 
