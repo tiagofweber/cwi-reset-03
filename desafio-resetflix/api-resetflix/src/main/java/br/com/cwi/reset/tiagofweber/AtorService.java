@@ -32,7 +32,7 @@ public class AtorService {
             throw new NomeIncompletoException();
         }
 
-        if (ator.calcularIdade() <= 0) {
+        if (ator.getDataNascimento().isAfter(LocalDate.now())) {
             throw new DataNascimentoInvalidaException();
         }
 
