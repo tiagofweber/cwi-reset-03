@@ -11,6 +11,7 @@ public class Aplicacao {
 
         AtorService atorService = new AtorService(fakeDatabase);
 
+        // Cadastro de Atores para testes
         AtorRequest atorRequest = new AtorRequest(
                 "Will Smith",
                 LocalDate.of(1968, Month.SEPTEMBER, 25),
@@ -62,5 +63,13 @@ public class Aplicacao {
         for (Ator ator: atores) {
             System.out.println(ator.toString());
         }
+
+        // Teste de consultar ator
+        try {
+            System.out.println(atorService.consultarAtor(null));
+        } catch (CampoObrigatorioNaoInformadoException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
