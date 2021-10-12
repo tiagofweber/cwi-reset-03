@@ -107,11 +107,28 @@ public class Aplicacao {
                 1968
         );
 
-        diretorService.cadastrarDiretor(diretorRequest);
-        diretorService.cadastrarDiretor(diretorRequest2);
-        diretorService.cadastrarDiretor(diretorRequest3);
+        try {
+            diretorService.cadastrarDiretor(diretorRequest);
+        } catch (CampoObrigatorioNaoInformadoException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            diretorService.cadastrarDiretor(diretorRequest2);
+        } catch (CampoObrigatorioNaoInformadoException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            diretorService.cadastrarDiretor(diretorRequest3);
+        } catch (CampoObrigatorioNaoInformadoException e) {
+            System.out.println(e.getMessage());
+        }
 
         List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+
+        System.out.println("Quantidade de diretores cadastrados: " + diretores.size());
+
         for (Diretor diretor: diretores) {
             System.out.println(diretor.toString());
         }
