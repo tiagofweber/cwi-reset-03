@@ -41,7 +41,7 @@ public class AtorService {
             throw new AnoInicioAtividadeInvalidoException();
         }
 
-        List<Ator> atores = this.consultarAtores();
+        List<Ator> atores = fakeDatabase.recuperaAtores();
 
         for (Ator atorCadastrado: atores) {
             if (atorCadastrado.getNome().equals(ator.getNome())) {
@@ -56,7 +56,7 @@ public class AtorService {
         if (id == null) {
             throw new CampoObrigatorioNaoInformadoException("id");
         }
-        List<Ator> atores = consultarAtores();
+        List<Ator> atores = fakeDatabase.recuperaAtores();
         Ator atorEncontrado = null;
         for (Ator ator: atores) {
             if (ator.getId().equals(id)) {
@@ -64,12 +64,16 @@ public class AtorService {
             }
         }
         if (atorEncontrado == null) {
-            throw new AtorNaoCadastradoException(id);
+            throw new AtorNaoCadastradoException("Nenhum ator encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados.");
         }
         return atorEncontrado;
     }
 
-    public List<Ator> consultarAtores() {
-        return fakeDatabase.recuperaAtores();
+    public List<Ator> consultarAtores() throws AtorNaoCadastradoException {
+        List<Ator> atores = fakeDatabase.recuperaAtores();
+        if (atores.size() == 0) {
+            throw new AtorNaoCadastradoException("Nenhum ator cadastrado, favor cadastrar atores.");
+        }
+        return atores;
     }
 }

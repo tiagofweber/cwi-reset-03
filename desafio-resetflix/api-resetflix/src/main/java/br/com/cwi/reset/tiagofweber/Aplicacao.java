@@ -51,22 +51,30 @@ public class Aplicacao {
             System.out.println(e.getMessage());
         }
 
-        List<Ator> atores = atorService.consultarAtores();
+        // Testa a consulta de atores
+        try {
+            List<Ator> atores = atorService.consultarAtores();
+
+            System.out.println("Quantidade de atores cadastrados: " + atores.size());
+
+            for (Ator ator: atores) {
+                System.out.println(ator.toString());
+            }
+        } catch (AtorNaoCadastradoException e) {
+            System.out.println(e.getMessage());
+        }
+
 
 /*
         System.out.println("Deve conter 1 ator, quantidade encontrada: " + atores.size());
         System.out.println("Primeiro ator deve ser 'Will Smith', valor encontrado: " + atores.get(0).getNome());
 */
 
-        System.out.println("Quantidade de atores cadastrados: " + atores.size());
 
-        for (Ator ator: atores) {
-            System.out.println(ator.toString());
-        }
 
-        // Teste de consultar ator
+        // Testa consultar ator por id
         try {
-            System.out.println(atorService.consultarAtor(3));
+            System.out.println(atorService.consultarAtor(1));
         } catch (CampoObrigatorioNaoInformadoException | AtorNaoCadastradoException e) {
             System.out.println(e.getMessage());
         }
