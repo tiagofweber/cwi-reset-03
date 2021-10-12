@@ -11,7 +11,7 @@ public class Aplicacao {
 
         AtorService atorService = new AtorService(fakeDatabase);
 
-        // Cadastro de Atores para testes
+        /*** Cadastro de Atores para testes ***/
         AtorRequest atorRequest = new AtorRequest(
                 "Will Smith",
                 LocalDate.of(1968, Month.SEPTEMBER, 25),
@@ -51,8 +51,21 @@ public class Aplicacao {
             System.out.println(e.getMessage());
         }
 
-        // Testa a consulta de atores
+
+
+        /*** Testa listar atores em atividade ***/
         try {
+            List<Ator> atoresEmAtividade = atorService.listarAtoresEmAtividade("");
+            for (Ator ator: atoresEmAtividade) {
+                System.out.println(ator.toString());
+            }
+        } catch (AtorNaoCadastradoException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        /*** Testa a consulta de atores ***/
+        /*try {
             List<Ator> atores = atorService.consultarAtores();
 
             System.out.println("Quantidade de atores cadastrados: " + atores.size());
@@ -62,22 +75,17 @@ public class Aplicacao {
             }
         } catch (AtorNaoCadastradoException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
-
-/*
-        System.out.println("Deve conter 1 ator, quantidade encontrada: " + atores.size());
-        System.out.println("Primeiro ator deve ser 'Will Smith', valor encontrado: " + atores.get(0).getNome());
-*/
-
-
+/*        System.out.println("Deve conter 1 ator, quantidade encontrada: " + atores.size());
+        System.out.println("Primeiro ator deve ser 'Will Smith', valor encontrado: " + atores.get(0).getNome()); */
 
         // Testa consultar ator por id
-        try {
+        /*try {
             System.out.println(atorService.consultarAtor(1));
         } catch (CampoObrigatorioNaoInformadoException | AtorNaoCadastradoException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
     }
 }
