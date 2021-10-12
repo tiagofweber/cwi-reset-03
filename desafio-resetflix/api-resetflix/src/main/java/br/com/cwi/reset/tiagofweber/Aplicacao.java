@@ -10,6 +10,7 @@ public class Aplicacao {
         FakeDatabase fakeDatabase = new FakeDatabase();
 
         AtorService atorService = new AtorService(fakeDatabase);
+        DiretorService diretorService = new DiretorService(fakeDatabase);
 
         /*** Cadastro de Atores para testes ***/
         AtorRequest atorRequest = new AtorRequest(
@@ -52,16 +53,15 @@ public class Aplicacao {
         }
 
 
-
         /*** Testa listar atores em atividade ***/
-        try {
+        /*try {
             List<Ator> atoresEmAtividade = atorService.listarAtoresEmAtividade("");
             for (Ator ator: atoresEmAtividade) {
                 System.out.println(ator.toString());
             }
         } catch (AtorNaoCadastradoException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
 
         /*** Testa a consulta de atores ***/
@@ -86,6 +86,35 @@ public class Aplicacao {
         } catch (CampoObrigatorioNaoInformadoException | AtorNaoCadastradoException e) {
             System.out.println(e.getMessage());
         }*/
+
+
+        /*** Cadastra diretores para teste ***/
+        DiretorRequest diretorRequest = new DiretorRequest(
+                "Steven Spielberg",
+                LocalDate.of(1946, Month.DECEMBER, 18),
+                1971
+        );
+
+        DiretorRequest diretorRequest2 = new DiretorRequest(
+                "Jean-Luc Godard",
+                LocalDate.of(1930, Month.DECEMBER, 3),
+                1960
+        );
+
+        DiretorRequest diretorRequest3 = new DiretorRequest(
+                "Martin Scorsese",
+                LocalDate.of(1942, Month.NOVEMBER, 17),
+                1968
+        );
+
+        diretorService.cadastrarDiretor(diretorRequest);
+        diretorService.cadastrarDiretor(diretorRequest2);
+        diretorService.cadastrarDiretor(diretorRequest3);
+
+        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+        for (Diretor diretor: diretores) {
+            System.out.println(diretor.toString());
+        }
 
     }
 }

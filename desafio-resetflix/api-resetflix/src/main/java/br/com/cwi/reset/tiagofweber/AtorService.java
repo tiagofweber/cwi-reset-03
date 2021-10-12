@@ -16,7 +16,6 @@ public class AtorService {
     public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException, AnoInicioAtividadeInvalidoException, NomeInvalidoException {
 
         Integer novoId = fakeDatabase.recuperaAtores().size() + 1;
-        LocalDate dataAtual = LocalDate.now();
 
         Ator ator = new Ator(novoId, atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
 
