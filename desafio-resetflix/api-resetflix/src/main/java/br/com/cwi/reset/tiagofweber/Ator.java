@@ -1,6 +1,7 @@
 package br.com.cwi.reset.tiagofweber;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Ator {
 
@@ -16,6 +17,14 @@ public class Ator {
         this.dataNascimento = dataNascimento;
         this.statusCarreira = statusCarreira;
         this.anoInicioAtividade = anoInicioAtividade;
+    }
+
+    public Integer calcularIdade() {
+        dataNascimento = this.dataNascimento;
+        LocalDate dataAtual = LocalDate.now();
+        Period periodo = Period.between(dataNascimento, dataAtual);
+        System.out.println(periodo.getYears());
+        return periodo.getYears();
     }
 
     public Integer getId() {

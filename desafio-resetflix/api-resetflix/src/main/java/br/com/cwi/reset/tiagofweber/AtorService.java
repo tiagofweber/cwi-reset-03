@@ -1,5 +1,7 @@
 package br.com.cwi.reset.tiagofweber;
 
+import java.time.LocalDate;
+
 public class AtorService {
 
     private FakeDatabase fakeDatabase;
@@ -9,9 +11,10 @@ public class AtorService {
     }
 
     // Demais métodos da classe
-    public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException {
+    public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException {
 
         Integer novoId = fakeDatabase.recuperaAtores().size() + 1;
+        LocalDate dataAtual = LocalDate.now();
 
         Ator ator = new Ator(novoId, atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
 
@@ -27,6 +30,10 @@ public class AtorService {
 
         if (!ator.getNome().contains(" ")) {
             throw new NomeIncompletoException();
+        }
+
+        if (ator.calcularIdade() <= 0) {
+            throw new DataNascimentoInvalidaException();
         }
 
         fakeDatabase.persisteAtor(ator);

@@ -17,15 +17,15 @@ public class Aplicacao {
         Integer anoInicioAtividade = 1986;
         AtorRequest atorRequest = new AtorRequest(nome, dataNascimento, statusCarreira, anoInicioAtividade);
 
-        String nome2 = "Chyler Leigh Potts";
+/*        String nome2 = "Chyler Leigh Potts";
         LocalDate dataNascimento2 = LocalDate.of(1982, Month.APRIL, 10);
         StatusCarreira statusCarreira2 = StatusCarreira.EM_ATIVIDADE;
         Integer anoInicioAtividade2 = 1997;
-        AtorRequest atorRequest2 = new AtorRequest(nome2, dataNascimento2, statusCarreira2, anoInicioAtividade2);
+        AtorRequest atorRequest2 = new AtorRequest(nome2, dataNascimento2, statusCarreira2, anoInicioAtividade2);*/
 
         try {
             atorService.criarAtor(atorRequest);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException e) {
             System.out.println(e.getMessage());
         }
 
