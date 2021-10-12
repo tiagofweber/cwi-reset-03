@@ -26,27 +26,27 @@ public class Aplicacao {
          );
 
         AtorRequest atorRequest3 = new AtorRequest(
-                "Chyler Leigh Potts",
-                LocalDate.of(1982, Month.APRIL, 10),
-                StatusCarreira.EM_ATIVIDADE,
-                1997
+                "Emma Watson",
+                LocalDate.of(1990, Month.APRIL, 15),
+                StatusCarreira.APOSENTADO,
+                1999
         );
 
         try {
             atorService.criarAtor(atorRequest);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             atorService.criarAtor(atorRequest2);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             atorService.criarAtor(atorRequest3);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
