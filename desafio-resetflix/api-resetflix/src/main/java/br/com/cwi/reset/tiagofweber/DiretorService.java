@@ -74,4 +74,21 @@ public class DiretorService {
 
         return diretoresFiltrados;
     }
+
+    public Diretor consultarDiretor(Integer id) throws CampoObrigatorioNaoInformadoException, DiretorNaoCadastradoException {
+        if (id == null) {
+            throw new CampoObrigatorioNaoInformadoException("id");
+        }
+        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+        Diretor diretorEncontrado = null;
+        for (Diretor diretor: diretores) {
+            if (diretor.getId().equals(id)) {
+                diretorEncontrado = diretor;
+            }
+        }
+        if (diretorEncontrado == null) {
+            throw new DiretorNaoCadastradoException("Nenhum diretor encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados.");
+        }
+        return diretorEncontrado;
+    }
 }

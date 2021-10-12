@@ -135,5 +135,13 @@ public class Aplicacao {
         } catch (DiretorNaoCadastradoException e) {
             System.out.println(e.getMessage());
         }
+
+        /*** Testa consulta de diretor por id ***/
+        /*try {
+            Diretor diretor = diretorService.consultarDiretor(1);
+            System.out.println(diretor.toString());
+        } catch (DiretorNaoCadastradoException | CampoObrigatorioNaoInformadoException e) {
+            System.out.println(e.getMessage());
+        }*/
     }
 }
