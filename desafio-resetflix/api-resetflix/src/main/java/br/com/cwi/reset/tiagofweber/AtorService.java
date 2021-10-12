@@ -34,7 +34,7 @@ public class AtorService {
         }
 
         if (ator.getDataNascimento().isAfter(LocalDate.now())) {
-            throw new DataNascimentoInvalidaException();
+            throw new DataNascimentoInvalidaException("atores");
         }
 
         if (ator.getAnoInicioAtividade() <= ator.getDataNascimento().getYear()) {
