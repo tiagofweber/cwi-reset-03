@@ -9,7 +9,7 @@ public class AtorService {
     }
 
     // Demais métodos da classe
-    public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException {
+    public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException {
 
         Integer novoId = fakeDatabase.recuperaAtores().size() + 1;
 
@@ -23,6 +23,10 @@ public class AtorService {
             throw new CampoObrigatorioNaoInformadoException("status carreira");
         } else if (ator.getAnoInicioAtividade() == null) {
             throw new CampoObrigatorioNaoInformadoException("ano inicio atividade");
+        }
+
+        if (!ator.getNome().contains(" ")) {
+            throw new NomeIncompletoException();
         }
 
         fakeDatabase.persisteAtor(ator);
