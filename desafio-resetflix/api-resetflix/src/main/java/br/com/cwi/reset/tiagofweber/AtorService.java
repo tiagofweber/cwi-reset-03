@@ -13,7 +13,7 @@ public class AtorService {
     }
 
     // Demais métodos da classe
-    public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException, AnoInicioAtividadeInvalidoException, NomeInvalidoException {
+    public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataInvalidaException, NomeInvalidoException {
 
         Integer novoId = fakeDatabase.recuperaAtores().size() + 1;
 
@@ -34,11 +34,11 @@ public class AtorService {
         }
 
         if (ator.getDataNascimento().isAfter(LocalDate.now())) {
-            throw new DataNascimentoInvalidaException("atores");
+            throw new DataInvalidaException("Não é possível cadastrar atores não nascidos");
         }
 
         if (ator.getAnoInicioAtividade() <= ator.getDataNascimento().getYear()) {
-            throw new AnoInicioAtividadeInvalidoException("ator");
+            throw new DataInvalidaException("Ano de início de atividade inválido para o ator cadastrado");
         }
 
         List<Ator> atores = fakeDatabase.recuperaAtores();

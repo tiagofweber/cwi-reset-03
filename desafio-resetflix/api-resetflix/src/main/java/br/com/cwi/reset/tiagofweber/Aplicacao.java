@@ -36,19 +36,19 @@ public class Aplicacao {
 
         try {
             atorService.criarAtor(atorRequest);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             atorService.criarAtor(atorRequest2);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             atorService.criarAtor(atorRequest3);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
@@ -65,17 +65,15 @@ public class Aplicacao {
 
 
         /*** Testa a consulta de atores ***/
-        /*try {
+        try {
             List<Ator> atores = atorService.consultarAtores();
-
-            System.out.println("Quantidade de atores cadastrados: " + atores.size());
 
             for (Ator ator: atores) {
                 System.out.println(ator.toString());
             }
         } catch (AtorNaoCadastradoException e) {
             System.out.println(e.getMessage());
-        }*/
+        }
 
 /*        System.out.println("Deve conter 1 ator, quantidade encontrada: " + atores.size());
         System.out.println("Primeiro ator deve ser 'Will Smith', valor encontrado: " + atores.get(0).getNome()); */
@@ -109,19 +107,19 @@ public class Aplicacao {
 
         try {
             diretorService.cadastrarDiretor(diretorRequest);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest2);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest3);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataNascimentoInvalidaException | AnoInicioAtividadeInvalidoException | NomeInvalidoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
             System.out.println(e.getMessage());
         }
 

@@ -12,7 +12,7 @@ public class DiretorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataNascimentoInvalidaException, AnoInicioAtividadeInvalidoException, NomeInvalidoException {
+    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataInvalidaException, NomeInvalidoException {
 
         Integer novoId = fakeDatabase.recuperaDiretores().size() + 1;
 
@@ -31,11 +31,11 @@ public class DiretorService {
         }
 
         if (diretor.getDataNascimento().isAfter(LocalDate.now())) {
-            throw new DataNascimentoInvalidaException("diretores");
+            throw new DataInvalidaException("Não é possível cadastrar diretores não nascidos");
         }
 
         if (diretor.getAnoInicioAtividade() <= diretor.getDataNascimento().getYear()) {
-            throw new AnoInicioAtividadeInvalidoException("diretor");
+            throw new DataInvalidaException("Ano de início de atividade inválido para o diretor cadastrado");
         }
 
         List<Diretor> diretores = fakeDatabase.recuperaDiretores();
