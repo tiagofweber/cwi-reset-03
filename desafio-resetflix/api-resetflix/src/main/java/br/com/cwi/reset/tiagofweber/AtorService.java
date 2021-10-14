@@ -13,24 +13,24 @@ public class AtorService {
     }
 
     // Demais métodos da classe
-    public void criarAtor(AtorRequest atorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataInvalidaException, NomeInvalidoException {
+    public void criarAtor(AtorRequest atorRequest) throws CampoInvalidoException, DataInvalidaException {
 
         Integer novoId = fakeDatabase.recuperaAtores().size() + 1;
 
         Ator ator = new Ator(novoId, atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
 
         if (ator.getNome() == null || ator.getNome().equals("")) {
-            throw new CampoObrigatorioNaoInformadoException("nome");
+            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo nome");
         } else if (ator.getDataNascimento() == null) {
-            throw new CampoObrigatorioNaoInformadoException("data de nascimento");
+            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo data de nascimento");
         } else if (ator.getStatusCarreira() == null) {
-            throw new CampoObrigatorioNaoInformadoException("status carreira");
+            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo status carreira");
         } else if (ator.getAnoInicioAtividade() == null) {
-            throw new CampoObrigatorioNaoInformadoException("ano inicio atividade");
+            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo ano inicio atividade");
         }
 
         if (!ator.getNome().contains(" ")) {
-            throw new NomeIncompletoException();
+            throw new CampoInvalidoException("Deve ser informado no mínimo nome e sobrenome para o ator");
         }
 
         if (ator.getDataNascimento().isAfter(LocalDate.now())) {
@@ -45,7 +45,7 @@ public class AtorService {
 
         for (Ator atorCadastrado: atores) {
             if (atorCadastrado.getNome().equals(ator.getNome())) {
-                throw new NomeInvalidoException("ator", ator.getNome());
+                throw new CampoInvalidoException(String.format("Já existe um ator cadastrado para o nome %s", ator.getNome()));
             }
         }
 
@@ -87,9 +87,9 @@ public class AtorService {
         return atoresFiltrados;
     }
 
-    public Ator consultarAtor(Integer id) throws CampoObrigatorioNaoInformadoException, CadastroInvalidoException {
+    public Ator consultarAtor(Integer id) throws CampoInvalidoException, CadastroInvalidoException {
         if (id == null) {
-            throw new CampoObrigatorioNaoInformadoException("id");
+            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo id");
         }
         List<Ator> atores = fakeDatabase.recuperaAtores();
         Ator atorEncontrado = null;

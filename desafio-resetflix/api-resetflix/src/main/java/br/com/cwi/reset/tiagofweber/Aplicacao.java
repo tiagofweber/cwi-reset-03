@@ -36,19 +36,19 @@ public class Aplicacao {
 
         try {
             atorService.criarAtor(atorRequest);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
+        } catch (CampoInvalidoException | DataInvalidaException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             atorService.criarAtor(atorRequest2);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
+        } catch (CampoInvalidoException | DataInvalidaException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             atorService.criarAtor(atorRequest3);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
+        } catch (CampoInvalidoException | DataInvalidaException e) {
             System.out.println(e.getMessage());
         }
 
@@ -65,7 +65,7 @@ public class Aplicacao {
 
 
         /*** Testa a consulta de atores ***/
-        /*try {
+        try {
             List<Ator> atores = atorService.consultarAtores();
 
             for (Ator ator: atores) {
@@ -73,7 +73,7 @@ public class Aplicacao {
             }
         } catch (CadastroInvalidoException e) {
             System.out.println(e.getMessage());
-        }*/
+        }
 
 /*        System.out.println("Deve conter 1 ator, quantidade encontrada: " + atores.size());
         System.out.println("Primeiro ator deve ser 'Will Smith', valor encontrado: " + atores.get(0).getNome()); */
@@ -81,7 +81,7 @@ public class Aplicacao {
         // Testa consultar ator por id
         /*try {
             System.out.println(atorService.consultarAtor(1));
-        } catch (CampoObrigatorioNaoInformadoException | CadastroInvalidoException e) {
+        } catch (CampoInvalidoException | CadastroInvalidoException e) {
             System.out.println(e.getMessage());
         }*/
 
@@ -107,24 +107,24 @@ public class Aplicacao {
 
         try {
             diretorService.cadastrarDiretor(diretorRequest);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
+        } catch (CampoInvalidoException | DataInvalidaException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest2);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
+        } catch (CampoInvalidoException | DataInvalidaException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             diretorService.cadastrarDiretor(diretorRequest3);
-        } catch (CampoObrigatorioNaoInformadoException | NomeIncompletoException | DataInvalidaException | NomeInvalidoException e) {
+        } catch (CampoInvalidoException | DataInvalidaException e) {
             System.out.println(e.getMessage());
         }
 
         /*** Testa listar diretores por filtro ***/
-        /*try {
+        try {
             List<Diretor> diretores = diretorService.listarDiretores("");
 
             for (Diretor diretor: diretores) {
@@ -132,13 +132,13 @@ public class Aplicacao {
             }
         } catch (CadastroInvalidoException e) {
             System.out.println(e.getMessage());
-        }*/
+        }
 
         /*** Testa consulta de diretor por id ***/
         /*try {
             Diretor diretor = diretorService.consultarDiretor(1);
             System.out.println(diretor.toString());
-        } catch (CadastroInvalidoException | CampoObrigatorioNaoInformadoException e) {
+        } catch (CadastroInvalidoException | CampoInvalidoException e) {
             System.out.println(e.getMessage());
         }*/
     }

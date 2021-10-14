@@ -12,22 +12,22 @@ public class DiretorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoObrigatorioNaoInformadoException, NomeIncompletoException, DataInvalidaException, NomeInvalidoException {
+    public void cadastrarDiretor(DiretorRequest diretorRequest) throws CampoInvalidoException, DataInvalidaException {
 
         Integer novoId = fakeDatabase.recuperaDiretores().size() + 1;
 
         Diretor diretor = new Diretor(novoId, diretorRequest.getNome(), diretorRequest.getDataNascimento(), diretorRequest.getAnoInicioAtividade());
 
         if (diretor.getNome() == null || diretor.getNome().equals("")) {
-            throw new CampoObrigatorioNaoInformadoException("nome");
+            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo nome");
         } else if (diretor.getDataNascimento() == null) {
-            throw new CampoObrigatorioNaoInformadoException("data de nascimento");
+            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo data de nascimento");
         } else if (diretor.getAnoInicioAtividade() == null) {
-            throw new CampoObrigatorioNaoInformadoException("ano inicio atividade");
+            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo ano inicio atividade");
         }
 
         if (!diretor.getNome().contains(" ")) {
-            throw new NomeIncompletoException();
+            throw new CampoInvalidoException("Deve ser informado no mínimo nome e sobrenome para o diretor");
         }
 
         if (diretor.getDataNascimento().isAfter(LocalDate.now())) {
@@ -42,7 +42,7 @@ public class DiretorService {
 
         for (Diretor diretorCadastrado: diretores) {
             if (diretorCadastrado.getNome().equals(diretor.getNome())) {
-                throw new NomeInvalidoException("diretor", diretor.getNome());
+                throw new CampoInvalidoException(String.format("Já existe um diretor cadastrado para o nome %s", diretor.getNome()));
             }
         }
 
@@ -75,9 +75,9 @@ public class DiretorService {
         return diretoresFiltrados;
     }
 
-    public Diretor consultarDiretor(Integer id) throws CampoObrigatorioNaoInformadoException, CadastroInvalidoException {
+    public Diretor consultarDiretor(Integer id) throws CampoInvalidoException, CadastroInvalidoException {
         if (id == null) {
-            throw new CampoObrigatorioNaoInformadoException("id");
+            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo id");
         }
         List<Diretor> diretores = fakeDatabase.recuperaDiretores();
         Diretor diretorEncontrado = null;
