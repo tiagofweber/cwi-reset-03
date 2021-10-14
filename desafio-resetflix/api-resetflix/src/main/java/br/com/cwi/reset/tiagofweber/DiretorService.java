@@ -50,12 +50,12 @@ public class DiretorService {
 
     }
 
-    public List<Diretor> listarDiretores(String filtroNome) throws DiretorNaoCadastradoException {
+    public List<Diretor> listarDiretores(String filtroNome) throws CadastroInvalidoException {
         List<Diretor> diretores = fakeDatabase.recuperaDiretores();
         List<Diretor> diretoresFiltrados = new ArrayList<>();
 
         if (diretores.size() == 0) {
-            throw new DiretorNaoCadastradoException("Nenhum diretor cadastrado, favor cadastrar diretores.");
+            throw new CadastroInvalidoException("Nenhum diretor cadastrado, favor cadastrar diretores");
         }
 
         for (Diretor diretor: diretores) {
@@ -69,13 +69,13 @@ public class DiretorService {
         }
 
         if (diretoresFiltrados.size() == 0) {
-            throw new DiretorNaoCadastradoException(String.format("Diretor não encontrado com filtro %s, favor informar outro filtro", filtroNome));
+            throw new CadastroInvalidoException(String.format("Diretor não encontrado com filtro %s, favor informar outro filtro", filtroNome));
         }
 
         return diretoresFiltrados;
     }
 
-    public Diretor consultarDiretor(Integer id) throws CampoObrigatorioNaoInformadoException, DiretorNaoCadastradoException {
+    public Diretor consultarDiretor(Integer id) throws CampoObrigatorioNaoInformadoException, CadastroInvalidoException {
         if (id == null) {
             throw new CampoObrigatorioNaoInformadoException("id");
         }
@@ -87,7 +87,7 @@ public class DiretorService {
             }
         }
         if (diretorEncontrado == null) {
-            throw new DiretorNaoCadastradoException("Nenhum diretor encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados.");
+            throw new CadastroInvalidoException(String.format("Nenhum diretor encontrado com o parâmetro id=%s, favor verifique os parâmetros informados", id));
         }
         return diretorEncontrado;
     }

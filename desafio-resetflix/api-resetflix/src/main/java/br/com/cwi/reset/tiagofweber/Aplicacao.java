@@ -59,21 +59,21 @@ public class Aplicacao {
             for (Ator ator: atoresEmAtividade) {
                 System.out.println(ator.toString());
             }
-        } catch (AtorNaoCadastradoException e) {
+        } catch (CadastroInvalidoException e) {
             System.out.println(e.getMessage());
         }*/
 
 
         /*** Testa a consulta de atores ***/
-        try {
+        /*try {
             List<Ator> atores = atorService.consultarAtores();
 
             for (Ator ator: atores) {
                 System.out.println(ator.toString());
             }
-        } catch (AtorNaoCadastradoException e) {
+        } catch (CadastroInvalidoException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
 /*        System.out.println("Deve conter 1 ator, quantidade encontrada: " + atores.size());
         System.out.println("Primeiro ator deve ser 'Will Smith', valor encontrado: " + atores.get(0).getNome()); */
@@ -81,7 +81,7 @@ public class Aplicacao {
         // Testa consultar ator por id
         /*try {
             System.out.println(atorService.consultarAtor(1));
-        } catch (CampoObrigatorioNaoInformadoException | AtorNaoCadastradoException e) {
+        } catch (CampoObrigatorioNaoInformadoException | CadastroInvalidoException e) {
             System.out.println(e.getMessage());
         }*/
 
@@ -124,21 +124,21 @@ public class Aplicacao {
         }
 
         /*** Testa listar diretores por filtro ***/
-        try {
+        /*try {
             List<Diretor> diretores = diretorService.listarDiretores("");
 
             for (Diretor diretor: diretores) {
                 System.out.println(diretor.toString());
             }
-        } catch (DiretorNaoCadastradoException e) {
+        } catch (CadastroInvalidoException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
         /*** Testa consulta de diretor por id ***/
         /*try {
             Diretor diretor = diretorService.consultarDiretor(1);
             System.out.println(diretor.toString());
-        } catch (DiretorNaoCadastradoException | CampoObrigatorioNaoInformadoException e) {
+        } catch (CadastroInvalidoException | CampoObrigatorioNaoInformadoException e) {
             System.out.println(e.getMessage());
         }*/
     }

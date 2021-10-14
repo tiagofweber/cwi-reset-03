@@ -52,14 +52,14 @@ public class AtorService {
         fakeDatabase.persisteAtor(ator);
     }
 
-    public List<Ator> listarAtoresEmAtividade(String filtroNome) throws AtorNaoCadastradoException {
+    public List<Ator> listarAtoresEmAtividade(String filtroNome) throws CadastroInvalidoException {
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
         List<Ator> atoresEmAtividade = new ArrayList<>();
         List<Ator> atoresFiltrados = new ArrayList<>();
 
         if (atores.size() == 0) {
-            throw new AtorNaoCadastradoException("Nenhum ator cadastrado, favor cadastrar atores.");
+            throw new CadastroInvalidoException("Nenhum ator cadastrado, favor cadastrar atores");
         }
 
         for (Ator ator: atores) {
@@ -81,13 +81,13 @@ public class AtorService {
         }
 
         if (atoresFiltrados.size() == 0) {
-            throw new AtorNaoCadastradoException(String.format("Ator não encontrado com o filtro %s, favor informar outro filtro.", filtroNome));
+            throw new CadastroInvalidoException(String.format("Ator não encontrado com o filtro %s, favor informar outro filtro", filtroNome));
         }
 
         return atoresFiltrados;
     }
 
-    public Ator consultarAtor(Integer id) throws CampoObrigatorioNaoInformadoException, AtorNaoCadastradoException {
+    public Ator consultarAtor(Integer id) throws CampoObrigatorioNaoInformadoException, CadastroInvalidoException {
         if (id == null) {
             throw new CampoObrigatorioNaoInformadoException("id");
         }
@@ -99,15 +99,15 @@ public class AtorService {
             }
         }
         if (atorEncontrado == null) {
-            throw new AtorNaoCadastradoException("Nenhum ator encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados.");
+            throw new CadastroInvalidoException(String.format("Nenhum ator encontrado com o parâmetro id=%s, favor verifique os parâmetros informados", id));
         }
         return atorEncontrado;
     }
 
-    public List<Ator> consultarAtores() throws AtorNaoCadastradoException {
+    public List<Ator> consultarAtores() throws CadastroInvalidoException {
         List<Ator> atores = fakeDatabase.recuperaAtores();
         if (atores.size() == 0) {
-            throw new AtorNaoCadastradoException("Nenhum ator cadastrado, favor cadastrar atores.");
+            throw new CadastroInvalidoException("Nenhum ator cadastrado, favor cadastrar atores");
         }
         return atores;
     }
