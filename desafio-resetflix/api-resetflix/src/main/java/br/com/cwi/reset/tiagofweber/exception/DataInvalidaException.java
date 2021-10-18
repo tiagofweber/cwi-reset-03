@@ -1,4 +1,4 @@
-package br.com.cwi.reset.tiagofweber;
+package br.com.cwi.reset.tiagofweber.exception;
 
 public class DataInvalidaException extends Exception {
     public DataInvalidaException(String message) {

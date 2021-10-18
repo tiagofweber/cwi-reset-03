@@ -1,4 +1,4 @@
-package br.com.cwi.reset.tiagofweber;
+package br.com.cwi.reset.tiagofweber.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

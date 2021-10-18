@@ -1,4 +1,4 @@
-package br.com.cwi.reset.tiagofweber;
+package br.com.cwi.reset.tiagofweber.model;
 
 public enum Genero {
     ACAO,

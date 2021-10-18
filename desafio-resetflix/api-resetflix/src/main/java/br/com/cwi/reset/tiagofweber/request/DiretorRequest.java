@@ -1,20 +1,17 @@
-package br.com.cwi.reset.tiagofweber;
+package br.com.cwi.reset.tiagofweber.request;
 
 import java.time.LocalDate;
 
-public class AtorRequest {
+public class DiretorRequest {
 
     private String nome;
     private LocalDate dataNascimento;
-    private StatusCarreira statusCarreira;
     private Integer anoInicioAtividade;
 
-    public AtorRequest(String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
+    public DiretorRequest(String nome, LocalDate dataNascimento, Integer anoInicioAtividade) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.statusCarreira = statusCarreira;
         this.anoInicioAtividade = anoInicioAtividade;
-
     }
 
     public String getNome() {
@@ -23,10 +20,6 @@ public class AtorRequest {
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
-    }
-
-    public StatusCarreira getStatusCarreira() {
-        return statusCarreira;
     }
 
     public Integer getAnoInicioAtividade() {

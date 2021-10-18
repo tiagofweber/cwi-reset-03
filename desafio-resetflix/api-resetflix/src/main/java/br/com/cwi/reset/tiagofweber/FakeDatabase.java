@@ -1,5 +1,7 @@
 package br.com.cwi.reset.tiagofweber;
 
+import br.com.cwi.reset.tiagofweber.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

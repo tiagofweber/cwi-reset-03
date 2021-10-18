@@ -1,4 +1,11 @@
-package br.com.cwi.reset.tiagofweber;
+package br.com.cwi.reset.tiagofweber.service;
+
+import br.com.cwi.reset.tiagofweber.FakeDatabase;
+import br.com.cwi.reset.tiagofweber.exception.CadastroInvalidoException;
+import br.com.cwi.reset.tiagofweber.exception.CampoInvalidoException;
+import br.com.cwi.reset.tiagofweber.exception.DataInvalidaException;
+import br.com.cwi.reset.tiagofweber.model.Diretor;
+import br.com.cwi.reset.tiagofweber.request.DiretorRequest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
