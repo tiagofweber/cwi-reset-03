@@ -2,6 +2,7 @@ package br.com.cwi.reset.tiagofweber.controller;
 
 import br.com.cwi.reset.tiagofweber.model.Ator;
 import br.com.cwi.reset.tiagofweber.request.AtorRequest;
+import br.com.cwi.reset.tiagofweber.response.AtorEmAtividade;
 import br.com.cwi.reset.tiagofweber.service.AtorService;
 import br.com.cwi.reset.tiagofweber.FakeDatabase;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class AtorController {
 
     // Verificar retorno List<AtorEmAtividade>
     @GetMapping("/em-atividade")
-    public List<Ator> listarAtoresEmAtividade(@RequestParam("filtro-nome") String filtroNome) throws Exception {
+    public List<AtorEmAtividade> listarAtoresEmAtividade(@RequestParam("filtro-nome") String filtroNome) throws Exception {
         return atorService.listarAtoresEmAtividade(filtroNome);
     }
 

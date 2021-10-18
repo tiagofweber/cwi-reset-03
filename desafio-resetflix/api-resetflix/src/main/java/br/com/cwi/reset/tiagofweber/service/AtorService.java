@@ -7,6 +7,7 @@ import br.com.cwi.reset.tiagofweber.exception.DataInvalidaException;
 import br.com.cwi.reset.tiagofweber.model.Ator;
 import br.com.cwi.reset.tiagofweber.model.StatusCarreira;
 import br.com.cwi.reset.tiagofweber.request.AtorRequest;
+import br.com.cwi.reset.tiagofweber.response.AtorEmAtividade;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -60,11 +61,11 @@ public class AtorService {
         fakeDatabase.persisteAtor(ator);
     }
 
-    public List<Ator> listarAtoresEmAtividade(String filtroNome) throws CadastroInvalidoException {
+    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws CadastroInvalidoException {
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
         List<Ator> atoresEmAtividade = new ArrayList<>();
-        List<Ator> atoresFiltrados = new ArrayList<>();
+        List<AtorEmAtividade> atoresFiltrados = new ArrayList<>();
 
         if (atores.size() == 0) {
             throw new CadastroInvalidoException("Nenhum ator cadastrado, favor cadastrar atores");
@@ -78,12 +79,12 @@ public class AtorService {
 
         if (filtroNome.equals("")) {
             for (Ator ator: atoresEmAtividade) {
-                atoresFiltrados.add(ator);
+                atoresFiltrados.add(new AtorEmAtividade(ator.getId(), ator.getNome(), ator.getDataNascimento()));
             }
         } else {
             for (Ator ator: atoresEmAtividade) {
                 if (ator.getNome().contains(filtroNome)) {
-                    atoresFiltrados.add(ator);
+                    atoresFiltrados.add(new AtorEmAtividade(ator.getId(), ator.getNome(), ator.getDataNascimento()));
                 }
             }
         }
