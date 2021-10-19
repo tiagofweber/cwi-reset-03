@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class NomeSobrenomeObrigatorioException extends Exception {
     public NomeSobrenomeObrigatorioException(String tipo) {
-        super(String.format("Deve ser informado no mínimo nomme e sobrenome para o %s", tipo));
+        super(String.format("Deve ser informado no mínimo nome e sobrenome para o %s", tipo));
     }
 }
