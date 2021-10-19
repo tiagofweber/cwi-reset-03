@@ -1,9 +1,7 @@
 package br.com.cwi.reset.tiagofweber.service;
 
 import br.com.cwi.reset.tiagofweber.FakeDatabase;
-import br.com.cwi.reset.tiagofweber.exception.CadastroInvalidoException;
-import br.com.cwi.reset.tiagofweber.exception.CampoInvalidoException;
-import br.com.cwi.reset.tiagofweber.exception.DataInvalidaException;
+import br.com.cwi.reset.tiagofweber.exception.*;
 import br.com.cwi.reset.tiagofweber.model.Ator;
 import br.com.cwi.reset.tiagofweber.model.StatusCarreira;
 import br.com.cwi.reset.tiagofweber.request.AtorRequest;
@@ -22,53 +20,53 @@ public class AtorService {
     }
 
     // Demais métodos da classe
-    public void criarAtor(AtorRequest atorRequest) throws CampoInvalidoException, DataInvalidaException {
+    public void criarAtor(AtorRequest atorRequest) throws Exception {
 
         Integer novoId = fakeDatabase.recuperaAtores().size() + 1;
 
         Ator ator = new Ator(novoId, atorRequest.getNome(), atorRequest.getDataNascimento(), atorRequest.getStatusCarreira(), atorRequest.getAnoInicioAtividade());
 
         if (ator.getNome() == null || ator.getNome().equals("")) {
-            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo nome");
+            throw new NomeNaoInformadoException();
         } else if (ator.getDataNascimento() == null) {
-            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo data de nascimento");
+            throw new DataDeNascimentoNaoInformadaException();
         } else if (ator.getStatusCarreira() == null) {
-            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo status carreira");
+            throw new CampoNaoInformadoException("status carreira");
         } else if (ator.getAnoInicioAtividade() == null) {
-            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo ano inicio atividade");
+            throw new AnoInicioAtividadeNaoInformadoException();
         }
 
-        if (!ator.getNome().contains(" ")) {
-            throw new CampoInvalidoException("Deve ser informado no mínimo nome e sobrenome para o ator");
+        if (ator.getNome().split(" ").length < 2) {
+            throw new NomeSobrenomeObrigatorioException("ator");
         }
 
         if (ator.getDataNascimento().isAfter(LocalDate.now())) {
-            throw new DataInvalidaException("Não é possível cadastrar atores não nascidos");
+            throw new DataNascimentoInvalidaException("atores");
         }
 
         if (ator.getAnoInicioAtividade() <= ator.getDataNascimento().getYear()) {
-            throw new DataInvalidaException("Ano de início de atividade inválido para o ator cadastrado");
+            throw new AnoInicioAtividadeInvalidoException("ator");
         }
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
 
         for (Ator atorCadastrado: atores) {
             if (atorCadastrado.getNome().equals(ator.getNome())) {
-                throw new CampoInvalidoException(String.format("Já existe um ator cadastrado para o nome %s", ator.getNome()));
+                throw new CadastroDuplicadoException("ator", atorCadastrado.getNome());
             }
         }
 
         fakeDatabase.persisteAtor(ator);
     }
 
-    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws CadastroInvalidoException {
+    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
         List<Ator> atoresEmAtividade = new ArrayList<>();
         List<AtorEmAtividade> atoresFiltrados = new ArrayList<>();
 
         if (atores.size() == 0) {
-            throw new CadastroInvalidoException("Nenhum ator cadastrado, favor cadastrar atores");
+            throw new AtorNaoEncontradoException();
         }
 
         for (Ator ator: atores) {
@@ -90,15 +88,15 @@ public class AtorService {
         }
 
         if (atoresFiltrados.size() == 0) {
-            throw new CadastroInvalidoException(String.format("Ator não encontrado com o filtro %s, favor informar outro filtro", filtroNome));
+            throw new FiltroNomeNaoEncontradoException("ator", filtroNome);
         }
 
         return atoresFiltrados;
     }
 
-    public Ator consultarAtor(Integer id) throws CampoInvalidoException, CadastroInvalidoException {
+    public Ator consultarAtor(Integer id) throws Exception {
         if (id == null) {
-            throw new CampoInvalidoException("Campo obrigatório não informado. Favor informar o campo id");
+            throw new IdNaoInformadoException();
         }
         List<Ator> atores = fakeDatabase.recuperaAtores();
         Ator atorEncontrado = null;
@@ -108,15 +106,15 @@ public class AtorService {
             }
         }
         if (atorEncontrado == null) {
-            throw new CadastroInvalidoException(String.format("Nenhum ator encontrado com o parâmetro id=%s, favor verifique os parâmetros informados", id));
+            throw new IdNaoEncontradoException("ator", id);
         }
         return atorEncontrado;
     }
 
-    public List<Ator> consultarAtores() throws CadastroInvalidoException {
+    public List<Ator> consultarAtores() throws Exception {
         List<Ator> atores = fakeDatabase.recuperaAtores();
         if (atores.size() == 0) {
-            throw new CadastroInvalidoException("Nenhum ator cadastrado, favor cadastrar atores");
+            throw new AtorNaoEncontradoException();
         }
         return atores;
     }
