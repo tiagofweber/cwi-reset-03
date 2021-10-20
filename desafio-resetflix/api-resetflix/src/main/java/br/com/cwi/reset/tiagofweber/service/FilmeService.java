@@ -15,27 +15,12 @@ public class FilmeService {
     }
 
     PersonagemService personagemService = new PersonagemService(FakeDatabase.getInstance());
+    DiretorService diretorService = new DiretorService(FakeDatabase.getInstance());
+    EstudioService estudioService = new EstudioService(FakeDatabase.getInstance());
 
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
 
         Integer novoId = fakeDatabase.recuperaFilmes().size() + 1;
-        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
-        List<Estudio> estudios = fakeDatabase.recuperaEstudios();
-
-        Diretor diretorEncontrado = null;
-        Estudio estudioEncontrado = null;
-
-        for (Diretor diretor : diretores) {
-            if (diretor.getId() == filmeRequest.getIdDiretor()) {
-                diretorEncontrado = diretor;
-            }
-        }
-
-        for (Estudio estudio: estudios) {
-            if (estudio.getId() == filmeRequest.getIdEstudio()) {
-                estudioEncontrado = estudio;
-            }
-        }
 
         personagemService.criarPersonagens(filmeRequest.getPersonagens());
 
@@ -47,8 +32,8 @@ public class FilmeService {
                 filmeRequest.getAnoLancamento(),
                 filmeRequest.getCapaFilme(),
                 filmeRequest.getGeneros(),
-                diretorEncontrado,
-                estudioEncontrado,
+                diretorService.consultarDiretor(filmeRequest.getIdDiretor()),
+                estudioService.consultarEstudio(filmeRequest.getIdEstudio()),
                 personagens,
                 filmeRequest.getResumo()
         );
