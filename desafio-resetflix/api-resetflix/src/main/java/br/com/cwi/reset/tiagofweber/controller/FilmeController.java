@@ -28,7 +28,7 @@ public class FilmeController {
     }
 
     @GetMapping
-    public List<Filme> consultarFilmes() {
+    public List<Filme> consultarFilmes() throws Exception {
         return filmeService.consultarFilmes();
     }
 }
