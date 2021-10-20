@@ -15,27 +15,31 @@ public class PersonagemService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void criarPersonagem(PersonagemRequest personagemRequest) {
+    public void criarPersonagens(List<PersonagemRequest> personagensRequest) {
 
         Integer novoId = fakeDatabase.recuperaPersonagens().size() + 1;
         List<Ator> atores = fakeDatabase.recuperaAtores();
         Ator atorEncontrado = null;
 
-        for (Ator ator : atores) {
-            if (ator.getId().equals(personagemRequest.getIdAtor())) {
-                atorEncontrado = ator;
+        for (PersonagemRequest personagemRequest : personagensRequest) {
+            for (Ator ator : atores) {
+                if (ator.getId().equals(personagemRequest.getIdAtor())) {
+                    atorEncontrado = ator;
+                }
             }
+
+            PersonagemAtor personagemAtor = new PersonagemAtor(
+                    novoId,
+                    atorEncontrado,
+                    personagemRequest.getNomePersonagem(),
+                    personagemRequest.getDescricaoPersonagem(),
+                    personagemRequest.getTipoAtuacao()
+            );
+
+            fakeDatabase.persistePersonagem(personagemAtor);
         }
 
-        PersonagemAtor personagemAtor = new PersonagemAtor(
-                novoId,
-                atorEncontrado,
-                personagemRequest.getNomePersonagem(),
-                personagemRequest.getDescricaoPersonagem(),
-                personagemRequest.getTipoAtuacao()
-        );
 
-        fakeDatabase.persistePersonagem(personagemAtor);
     }
 
 }

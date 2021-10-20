@@ -4,9 +4,7 @@ import br.com.cwi.reset.tiagofweber.FakeDatabase;
 import br.com.cwi.reset.tiagofweber.model.*;
 import br.com.cwi.reset.tiagofweber.request.FilmeRequest;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class FilmeService {
 
@@ -16,8 +14,7 @@ public class FilmeService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    private final DiretorService diretorService = new DiretorService(fakeDatabase);
-    private final EstudioService estudioService = new EstudioService(fakeDatabase);
+    PersonagemService personagemService = new PersonagemService(fakeDatabase);
 
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
 
@@ -40,23 +37,9 @@ public class FilmeService {
             }
         }
 
+        personagemService.criarPersonagens(filmeRequest.getPersonagens());
 
-
-        List<PersonagemAtor> personagens = new ArrayList<>();
-        personagens.add(new PersonagemAtor(
-                1,
-                fakeDatabase.recuperaAtores().get(0),
-                "Jerry",
-                "Rato que vive sendo perseguido pelo gato Tom",
-                TipoAtuacao.PRINCIPAL
-        ));
-        personagens.add(new PersonagemAtor(
-                2,
-                fakeDatabase.recuperaAtores().get(1),
-                "Tom",
-                "Gato que contracena com o rato Jerry",
-                TipoAtuacao.COADJUVANTE
-        ));
+        List<PersonagemAtor> personagens = fakeDatabase.recuperaPersonagens();
 
         Filme filme = new Filme(
                 novoId,
