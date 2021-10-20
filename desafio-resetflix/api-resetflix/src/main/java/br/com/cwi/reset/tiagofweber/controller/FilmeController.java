@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/filmes")
 public class FilmeController {
@@ -23,5 +25,10 @@ public class FilmeController {
     public ResponseEntity<FilmeRequest> criarFilme(@RequestBody FilmeRequest filmeRequest) throws Exception {
         filmeService.criarFilme(filmeRequest);
         return ResponseEntity.ok(filmeRequest);
+    }
+
+    @GetMapping
+    public List<Filme> consultarFilmes() {
+        return filmeService.consultarFilmes();
     }
 }

@@ -14,7 +14,7 @@ public class FilmeService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    PersonagemService personagemService = new PersonagemService(fakeDatabase);
+    PersonagemService personagemService = new PersonagemService(FakeDatabase.getInstance());
 
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
 
@@ -54,5 +54,9 @@ public class FilmeService {
         );
 
         fakeDatabase.persisteFilme(filme);
+    }
+
+    public List<Filme> consultarFilmes() {
+        return fakeDatabase.recuperaFilmes();
     }
 }
