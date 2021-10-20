@@ -6,6 +6,7 @@ import br.com.cwi.reset.tiagofweber.request.FilmeRequest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FilmeService {
 
@@ -15,14 +16,29 @@ public class FilmeService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    private DiretorService diretorService = new DiretorService(fakeDatabase);
-    private EstudioService estudioService = new EstudioService(fakeDatabase);
+    private final DiretorService diretorService = new DiretorService(fakeDatabase);
+    private final EstudioService estudioService = new EstudioService(fakeDatabase);
 
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
 
         Integer novoId = fakeDatabase.recuperaFilmes().size() + 1;
-        Diretor diretor = diretorService.consultarDiretor(filmeRequest.getIdDiretor());
-        Estudio estudio = estudioService.consultarEstudio(filmeRequest.getIdEstudio());
+        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+        List<Estudio> estudios = fakeDatabase.recuperaEstudios();
+
+        Diretor diretorEncontrado = null;
+        Estudio estudioEncontrado = null;
+
+        for (Diretor diretor : diretores) {
+            if (diretor.getId() == filmeRequest.getIdDiretor()) {
+                diretorEncontrado = diretor;
+            }
+        }
+
+        for (Estudio estudio: estudios) {
+            if (estudio.getId() == filmeRequest.getIdEstudio()) {
+                estudioEncontrado = estudio;
+            }
+        }
 
         List<PersonagemAtor> personagens = new ArrayList<>();
         personagens.add(new PersonagemAtor(
@@ -46,8 +62,8 @@ public class FilmeService {
                 filmeRequest.getAnoLancamento(),
                 filmeRequest.getCapaFilme(),
                 filmeRequest.getGeneros(),
-                diretor,
-                estudio,
+                diretorEncontrado,
+                estudioEncontrado,
                 personagens,
                 filmeRequest.getResumo()
         );
