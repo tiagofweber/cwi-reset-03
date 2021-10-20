@@ -29,4 +29,9 @@ public class EstudioController {
     public List<Estudio> consultarEstudios(@RequestParam("filtro-nome") String filtroNome) throws Exception {
         return estudioService.consultarEstudios(filtroNome);
     }
+
+    @GetMapping("/{id}")
+    public Estudio consultarEstudio(@PathVariable Integer id) throws Exception {
+        return estudioService.consultarEstudio(id);
+    }
 }
