@@ -53,19 +53,19 @@ public class EstudioService {
 
     public List<Estudio> consultarEstudios(String filtroNome) throws Exception {
 
-        List<Estudio> estudios = new ArrayList<>();
+        List<Estudio> estudios = fakeDatabase.recuperaEstudios();
+        List<Estudio> estudiosFiltrados = new ArrayList<>();
 
-        if (filtroNome.equals("")) {
-            estudios = fakeDatabase.recuperaEstudios();
-        } else {
+        if (!filtroNome.equals("")) {
             for (Estudio estudio : estudios) {
                 if (estudio.getNome().contains(filtroNome)) {
-                    estudios.add(estudio);
-                    if (estudios.size() == 0) {
-                        throw new FiltroNomeNaoEncontradoException("Estúdio", filtroNome);
-                    }
+                    estudiosFiltrados.add(estudio);
                 }
             }
+            if (estudiosFiltrados.size() == 0) {
+                throw new FiltroNomeNaoEncontradoException("Estúdio", filtroNome);
+            }
+            return estudiosFiltrados;
         }
 
         if (estudios.size() == 0) {

@@ -26,7 +26,6 @@ public class AtorController {
         this.atorService.criarAtor(atorRequest);
     }
 
-    // Verificar retorno List<AtorEmAtividade>
     @GetMapping("/em-atividade")
     public List<AtorEmAtividade> listarAtoresEmAtividade(@RequestParam("filtro-nome") String filtroNome) throws Exception {
         return atorService.listarAtoresEmAtividade(filtroNome);
