@@ -1,6 +1,7 @@
 package br.com.cwi.reset.tiagofweber.service;
 
 import br.com.cwi.reset.tiagofweber.FakeDatabase;
+import br.com.cwi.reset.tiagofweber.exception.CadastroDuplicadoException;
 import br.com.cwi.reset.tiagofweber.model.*;
 import br.com.cwi.reset.tiagofweber.request.FilmeRequest;
 import br.com.cwi.reset.tiagofweber.validator.Validacao;
@@ -22,8 +23,16 @@ public class FilmeService {
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
 
         Integer novoId = fakeDatabase.recuperaFilmes().size() + 1;
-        Validacao.validarPersonagens(filmeRequest.getPersonagens());
 
+        List<Filme> filmes = this.consultarFilmes();
+
+        for (Filme filme : filmes) {
+            if (filme.getNome().equals(filmeRequest.getNome())) {
+                throw new CadastroDuplicadoException("filme", filmeRequest.getNome());
+            }
+        }
+
+        Validacao.validarPersonagens(filmeRequest.getPersonagens());
         personagemService.criarPersonagens(filmeRequest.getPersonagens());
 
         List<PersonagemAtor> personagens = fakeDatabase.recuperaPersonagens();

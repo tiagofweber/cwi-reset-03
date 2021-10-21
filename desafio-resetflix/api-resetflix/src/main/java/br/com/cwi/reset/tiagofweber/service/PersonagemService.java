@@ -21,10 +21,9 @@ public class PersonagemService {
 
     public void criarPersonagens(List<PersonagemRequest> personagensRequest) throws Exception {
 
-        Integer novoId = fakeDatabase.recuperaPersonagens().size() + 1;
-
         for (PersonagemRequest personagemRequest : personagensRequest) {
 
+            Integer novoId = fakeDatabase.recuperaPersonagens().size() + 1;
             Ator ator = atorService.consultarAtor(personagemRequest.getIdAtor());
 
             if (ator == null) {
