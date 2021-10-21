@@ -2,6 +2,8 @@ package br.com.cwi.reset.tiagofweber.service;
 
 import br.com.cwi.reset.tiagofweber.FakeDatabase;
 import br.com.cwi.reset.tiagofweber.exception.CadastroDuplicadoException;
+import br.com.cwi.reset.tiagofweber.exception.FilmeNaoCadastradoException;
+import br.com.cwi.reset.tiagofweber.exception.FilmeNaoEncontradoException;
 import br.com.cwi.reset.tiagofweber.model.*;
 import br.com.cwi.reset.tiagofweber.request.FilmeRequest;
 import br.com.cwi.reset.tiagofweber.validator.Validacao;
@@ -25,13 +27,13 @@ public class FilmeService {
 
         Integer novoId = fakeDatabase.recuperaFilmes().size() + 1;
 
-//        List<Filme> filmes = this.consultarFilmes();
+        List<Filme> filmes = fakeDatabase.recuperaFilmes();
 
-//        for (Filme filme : filmes) {
-//            if (filme.getNome().equals(filmeRequest.getNome())) {
-//                throw new CadastroDuplicadoException("filme", filmeRequest.getNome());
-//            }
-//        }
+        for (Filme filme : filmes) {
+            if (filme.getNome().equals(filmeRequest.getNome())) {
+                throw new CadastroDuplicadoException("filme", filmeRequest.getNome());
+            }
+        }
 
         Validacao.validarPersonagens(filmeRequest.getPersonagens());
         List<PersonagemAtor> personagens = personagemService.criarPersonagens(filmeRequest.getPersonagens());
@@ -62,6 +64,11 @@ public class FilmeService {
     public List<Filme> consultarFilmes(String nomeFilme, String nomeDiretor, String nomePersonagem, String nomeAtor) throws Exception {
 
         List<Filme> filmes = fakeDatabase.recuperaFilmes();
+
+        if (filmes.isEmpty()) {
+            throw new FilmeNaoCadastradoException();
+        }
+
         List<Filme> filmesFiltrados = new ArrayList<>();
 
         filmesFiltrados.addAll(filmes);
@@ -72,6 +79,25 @@ public class FilmeService {
 
         if (!nomeDiretor.equals("")) {
             filmesFiltrados.removeIf(filme2 -> !filme2.getDiretor().getNome().contains(nomeDiretor));
+        }
+
+        if (!nomePersonagem.equals("")) {
+            for (int i = 0; i < filmesFiltrados.size(); i++) {
+                List<PersonagemAtor> personagens = filmesFiltrados.get(i).getPersonagens();
+                boolean personagemEncontrado = false;
+                for (PersonagemAtor personagem : personagens) {
+                    if (personagem.getNomePersonagem().contains(nomePersonagem)) {
+                        personagemEncontrado = true;
+                    }
+                }
+                if (!personagemEncontrado) {
+                    filmesFiltrados.remove(filmesFiltrados.get(i));
+                }
+            }
+        }
+
+        if (filmesFiltrados.isEmpty()) {
+            throw new FilmeNaoEncontradoException(nomeFilme, nomeDiretor, nomePersonagem, nomeAtor);
         }
 
         return filmesFiltrados;
