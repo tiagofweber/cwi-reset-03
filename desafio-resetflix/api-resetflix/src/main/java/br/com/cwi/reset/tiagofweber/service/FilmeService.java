@@ -6,6 +6,7 @@ import br.com.cwi.reset.tiagofweber.model.*;
 import br.com.cwi.reset.tiagofweber.request.FilmeRequest;
 import br.com.cwi.reset.tiagofweber.validator.Validacao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilmeService {
@@ -24,18 +25,18 @@ public class FilmeService {
 
         Integer novoId = fakeDatabase.recuperaFilmes().size() + 1;
 
-        List<Filme> filmes = this.consultarFilmes();
+//        List<Filme> filmes = this.consultarFilmes();
 
-        for (Filme filme : filmes) {
-            if (filme.getNome().equals(filmeRequest.getNome())) {
-                throw new CadastroDuplicadoException("filme", filmeRequest.getNome());
-            }
-        }
+//        for (Filme filme : filmes) {
+//            if (filme.getNome().equals(filmeRequest.getNome())) {
+//                throw new CadastroDuplicadoException("filme", filmeRequest.getNome());
+//            }
+//        }
 
         Validacao.validarPersonagens(filmeRequest.getPersonagens());
-        personagemService.criarPersonagens(filmeRequest.getPersonagens());
+        List<PersonagemAtor> personagens = personagemService.criarPersonagens(filmeRequest.getPersonagens());
 
-        List<PersonagemAtor> personagens = fakeDatabase.recuperaPersonagens();
+//        List<PersonagemAtor> personagens = fakeDatabase.recuperaPersonagens();
 
         Validacao.validarString(TipoDado.NOME, filmeRequest.getNome());
         Validacao.validarInteger(TipoDado.ANO_LANCAMENTO, filmeRequest.getAnoLancamento());
@@ -60,7 +61,25 @@ public class FilmeService {
         fakeDatabase.persisteFilme(filme);
     }
 
-    public List<Filme> consultarFilmes() {
-        return fakeDatabase.recuperaFilmes();
+    public List<Filme> consultarFilmes(String nomeFilme, String nomeDiretor, String nomePersonagem, String nomeAtor) throws Exception {
+
+        List<Filme> filmes = fakeDatabase.recuperaFilmes();
+        List<Filme> filmesFiltrados = new ArrayList<>();
+        Boolean filtro = false;
+
+        if (!nomeFilme.equals("")) {
+            filtro = true;
+            for (Filme filme : filmes) {
+                if (filme.getNome().contains(nomeFilme)) {
+                    filmesFiltrados.add(filme);
+                }
+            }
+        }
+
+        if (!filtro) {
+            filmesFiltrados = filmes;
+        }
+
+        return filmesFiltrados;
     }
 }

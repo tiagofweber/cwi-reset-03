@@ -7,6 +7,7 @@ import br.com.cwi.reset.tiagofweber.model.Ator;
 import br.com.cwi.reset.tiagofweber.model.PersonagemAtor;
 import br.com.cwi.reset.tiagofweber.request.PersonagemRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonagemService {
@@ -19,7 +20,9 @@ public class PersonagemService {
         this.atorService = new AtorService(FakeDatabase.getInstance());
     }
 
-    public void criarPersonagens(List<PersonagemRequest> personagensRequest) throws Exception {
+    public List<PersonagemAtor> criarPersonagens(List<PersonagemRequest> personagensRequest) throws Exception {
+
+        List<PersonagemAtor> personagens = new ArrayList<>();
 
         for (PersonagemRequest personagemRequest : personagensRequest) {
 
@@ -38,10 +41,10 @@ public class PersonagemService {
                     personagemRequest.getTipoAtuacao()
             );
 
-            fakeDatabase.persistePersonagem(personagemAtor);
+            this.fakeDatabase.persistePersonagem(personagemAtor);
+            personagens.add(personagemAtor);
         }
-
-
+        return personagens;
     }
 
 }
