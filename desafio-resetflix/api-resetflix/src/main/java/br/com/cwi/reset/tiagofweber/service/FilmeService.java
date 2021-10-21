@@ -96,6 +96,21 @@ public class FilmeService {
             }
         }
 
+        if (!nomeAtor.equals("")) {
+            for (int i = 0; i < filmesFiltrados.size(); i++) {
+                List<PersonagemAtor> personagens = filmesFiltrados.get(i).getPersonagens();
+                boolean atorEncontrado = false;
+                for (PersonagemAtor personagem : personagens) {
+                    if (personagem.getAtor().getNome().contains(nomeAtor)) {
+                        atorEncontrado = true;
+                    }
+                }
+                if (!atorEncontrado) {
+                    filmesFiltrados.remove(filmesFiltrados.get(i));
+                }
+            }
+        }
+
         if (filmesFiltrados.isEmpty()) {
             throw new FilmeNaoEncontradoException(nomeFilme, nomeDiretor, nomePersonagem, nomeAtor);
         }
