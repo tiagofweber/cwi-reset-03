@@ -22,9 +22,8 @@ public class FilmeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<FilmeRequest> criarFilme(@RequestBody FilmeRequest filmeRequest) throws Exception {
+    public void criarFilme(@RequestBody FilmeRequest filmeRequest) throws Exception {
         filmeService.criarFilme(filmeRequest);
-        return ResponseEntity.ok(filmeRequest);
     }
 
     @GetMapping
