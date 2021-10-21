@@ -1,7 +1,6 @@
 package br.com.cwi.reset.tiagofweber.service;
 
 import br.com.cwi.reset.tiagofweber.FakeDatabase;
-import br.com.cwi.reset.tiagofweber.exception.AtorNaoEncontradoException;
 import br.com.cwi.reset.tiagofweber.exception.IdNaoEncontradoException;
 import br.com.cwi.reset.tiagofweber.model.Ator;
 import br.com.cwi.reset.tiagofweber.model.PersonagemAtor;

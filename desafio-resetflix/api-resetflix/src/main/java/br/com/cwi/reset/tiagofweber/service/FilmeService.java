@@ -36,8 +36,6 @@ public class FilmeService {
         Validacao.validarPersonagens(filmeRequest.getPersonagens());
         List<PersonagemAtor> personagens = personagemService.criarPersonagens(filmeRequest.getPersonagens());
 
-//        List<PersonagemAtor> personagens = fakeDatabase.recuperaPersonagens();
-
         Validacao.validarString(TipoDado.NOME, filmeRequest.getNome());
         Validacao.validarInteger(TipoDado.ANO_LANCAMENTO, filmeRequest.getAnoLancamento());
         Validacao.validarString(TipoDado.CAPA_FILME, filmeRequest.getCapaFilme());
@@ -65,19 +63,15 @@ public class FilmeService {
 
         List<Filme> filmes = fakeDatabase.recuperaFilmes();
         List<Filme> filmesFiltrados = new ArrayList<>();
-        Boolean filtro = false;
+
+        filmesFiltrados.addAll(filmes);
 
         if (!nomeFilme.equals("")) {
-            filtro = true;
-            for (Filme filme : filmes) {
-                if (filme.getNome().contains(nomeFilme)) {
-                    filmesFiltrados.add(filme);
-                }
-            }
+            filmesFiltrados.removeIf(filme1 -> !filme1.getNome().contains(nomeFilme));
         }
 
-        if (!filtro) {
-            filmesFiltrados = filmes;
+        if (!nomeDiretor.equals("")) {
+            filmesFiltrados.removeIf(filme2 -> !filme2.getDiretor().getNome().contains(nomeDiretor));
         }
 
         return filmesFiltrados;
