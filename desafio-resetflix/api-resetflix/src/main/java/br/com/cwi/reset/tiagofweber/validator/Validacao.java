@@ -1,6 +1,8 @@
 package br.com.cwi.reset.tiagofweber.validator;
 
 import br.com.cwi.reset.tiagofweber.exception.CampoNaoInformadoException;
+import br.com.cwi.reset.tiagofweber.exception.GeneroDuplicadoException;
+import br.com.cwi.reset.tiagofweber.exception.GeneroVazioException;
 import br.com.cwi.reset.tiagofweber.model.Genero;
 import br.com.cwi.reset.tiagofweber.model.TipoDado;
 import br.com.cwi.reset.tiagofweber.request.PersonagemRequest;
@@ -22,8 +24,18 @@ public class Validacao {
     }
 
     public static void validarGenero(List<Genero> generos) throws Exception {
-        if (generos == null || generos.isEmpty()) {
+        if (generos == null) {
             throw new CampoNaoInformadoException(TipoDado.GENERO.getDescricao());
+        }
+        if (generos.isEmpty()) {
+            throw new GeneroVazioException();
+        }
+        for (int i = 0; i < generos.size(); i++) {
+            for (int j = 0; j < generos.size(); j++) {
+                if (generos.get(i) == generos.get(j)) {
+                    throw new GeneroDuplicadoException();
+                }
+            }
         }
     }
 
