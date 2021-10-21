@@ -30,12 +30,17 @@ public class Validacao {
         if (generos.isEmpty()) {
             throw new GeneroVazioException();
         }
+        int contador = 0;
         for (int i = 0; i < generos.size(); i++) {
             for (int j = 0; j < generos.size(); j++) {
                 if (generos.get(i) == generos.get(j)) {
-                    throw new GeneroDuplicadoException();
+                    contador++;
                 }
             }
+            if (contador > 1) {
+                throw new GeneroDuplicadoException();
+            }
+            contador = 0;
         }
     }
 
