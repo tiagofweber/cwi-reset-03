@@ -20,20 +20,8 @@ public class DiretorService {
 
     public void cadastrarDiretor(DiretorRequest diretorRequest) throws Exception {
 
-        if (diretorRequest.getNome() == null || diretorRequest.getNome().equals("")) {
-            throw new NomeNaoInformadoException();
-        } else if (diretorRequest.getDataNascimento() == null) {
-            throw new DataDeNascimentoNaoInformadaException();
-        } else if (diretorRequest.getAnoInicioAtividade() == null) {
-            throw new AnoInicioAtividadeNaoInformadoException();
-        }
-
         if (diretorRequest.getNome().split(" ").length < 2) {
             throw new NomeSobrenomeObrigatorioException("diretor");
-        }
-
-        if (diretorRequest.getDataNascimento().isAfter(LocalDate.now())) {
-            throw new DataNascimentoInvalidaException("diretores");
         }
 
         if (diretorRequest.getAnoInicioAtividade() <= diretorRequest.getDataNascimento().getYear()) {
