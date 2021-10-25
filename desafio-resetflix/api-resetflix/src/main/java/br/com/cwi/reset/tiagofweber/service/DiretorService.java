@@ -17,7 +17,7 @@ public class DiretorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void cadastrarDiretor(DiretorRequest diretorRequest) throws Exception {
+    /*public void cadastrarDiretor(DiretorRequest diretorRequest) throws Exception {
 
         Integer novoId = fakeDatabase.recuperaDiretores().size() + 1;
 
@@ -53,7 +53,7 @@ public class DiretorService {
 
         fakeDatabase.persisteDiretor(diretor);
 
-    }
+    }*/
 
     public List<Diretor> listarDiretores(String filtroNome) throws Exception {
         List<Diretor> diretores = fakeDatabase.recuperaDiretores();

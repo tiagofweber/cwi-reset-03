@@ -16,10 +16,9 @@ public class PersonagemService {
 
     public PersonagemService(FakeDatabase fakeDatabase) {
         this.fakeDatabase = fakeDatabase;
-        this.atorService = new AtorService(FakeDatabase.getInstance());
     }
 
-    public List<PersonagemAtor> criarPersonagens(List<PersonagemRequest> personagensRequest) throws Exception {
+    /*public List<PersonagemAtor> criarPersonagens(List<PersonagemRequest> personagensRequest) throws Exception {
 
         List<PersonagemAtor> personagens = new ArrayList<>();
 
@@ -44,6 +43,6 @@ public class PersonagemService {
             personagens.add(personagemAtor);
         }
         return personagens;
-    }
+    }*/
 
 }

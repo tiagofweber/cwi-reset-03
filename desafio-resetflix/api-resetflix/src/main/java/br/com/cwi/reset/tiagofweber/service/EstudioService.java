@@ -17,7 +17,7 @@ public class EstudioService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void criarEstudio(EstudioRequest estudioRequest) throws Exception {
+    /*public void criarEstudio(EstudioRequest estudioRequest) throws Exception {
 
         Integer novoId = fakeDatabase.recuperaEstudios().size() + 1;
 
@@ -49,7 +49,7 @@ public class EstudioService {
         Estudio estudio = new Estudio(novoId, estudioRequest.getNome(), estudioRequest.getDescricao(), estudioRequest.getDataCriacao(), estudioRequest.getStatusAtividade());
 
         fakeDatabase.persisteEstudio(estudio);
-    }
+    }*/
 
     public List<Estudio> consultarEstudios(String filtroNome) throws Exception {
 

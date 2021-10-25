@@ -23,7 +23,7 @@ public class FilmeService {
     DiretorService diretorService = new DiretorService(FakeDatabase.getInstance());
     EstudioService estudioService = new EstudioService(FakeDatabase.getInstance());
 
-    public void criarFilme(FilmeRequest filmeRequest) throws Exception {
+    /*public void criarFilme(FilmeRequest filmeRequest) throws Exception {
 
         Integer novoId = fakeDatabase.recuperaFilmes().size() + 1;
 
@@ -36,7 +36,7 @@ public class FilmeService {
         }
 
         Validacao.validarPersonagens(filmeRequest.getPersonagens());
-        List<PersonagemAtor> personagens = personagemService.criarPersonagens(filmeRequest.getPersonagens());
+//        List<PersonagemAtor> personagens = personagemService.criarPersonagens(filmeRequest.getPersonagens());
 
         Validacao.validarString(TipoDado.NOME, filmeRequest.getNome());
         Validacao.validarInteger(TipoDado.ANO_LANCAMENTO, filmeRequest.getAnoLancamento());
@@ -59,7 +59,7 @@ public class FilmeService {
         );
 
         fakeDatabase.persisteFilme(filme);
-    }
+    }*/
 
     public List<Filme> consultarFilmes(String nomeFilme, String nomeDiretor, String nomePersonagem, String nomeAtor) throws Exception {
 

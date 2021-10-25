@@ -1,6 +1,7 @@
 package br.com.cwi.reset.tiagofweber.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -10,10 +11,14 @@ public class Ator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo nome")
     private String nome;
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo data de nascimento")
     private LocalDate dataNascimento;
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo status carreira")
     private StatusCarreira statusCarreira;
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo ano de início de atividade")
     private Integer anoInicioAtividade;
 
     public Ator() {

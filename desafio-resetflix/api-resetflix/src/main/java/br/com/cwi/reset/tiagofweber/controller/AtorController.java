@@ -4,25 +4,23 @@ import br.com.cwi.reset.tiagofweber.model.Ator;
 import br.com.cwi.reset.tiagofweber.request.AtorRequest;
 import br.com.cwi.reset.tiagofweber.response.AtorEmAtividade;
 import br.com.cwi.reset.tiagofweber.service.AtorService;
-import br.com.cwi.reset.tiagofweber.FakeDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/atores")
 public class AtorController {
 
+    @Autowired
     private AtorService atorService;
-
-    public AtorController() {
-        this.atorService = new AtorService(FakeDatabase.getInstance());
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarAtor(@RequestBody AtorRequest atorRequest) throws Exception {
+    public void criarAtor(@RequestBody @Valid AtorRequest atorRequest) throws Exception {
         this.atorService.criarAtor(atorRequest);
     }
 
