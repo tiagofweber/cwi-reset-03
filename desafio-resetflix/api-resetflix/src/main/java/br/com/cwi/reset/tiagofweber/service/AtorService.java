@@ -21,12 +21,10 @@ public class AtorService {
 
     public void criarAtor(AtorRequest atorRequest) throws Exception {
 
-        List<Ator> atores = atorRepository.findAll();
+        Ator atorJaExistente = atorRepository.findByNome(atorRequest.getNome());
 
-        for (Ator atorCadastrado: atores) {
-            if (atorCadastrado.getNome().equals(atorRequest.getNome())) {
-                throw new CadastroDuplicadoException("ator", atorCadastrado.getNome());
-            }
+        if (atorJaExistente != null) {
+            throw new CadastroDuplicadoException("ator", atorJaExistente.getNome());
         }
 
         Ator ator = new Ator(

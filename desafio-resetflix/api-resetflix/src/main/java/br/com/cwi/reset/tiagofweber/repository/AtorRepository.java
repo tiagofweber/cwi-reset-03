@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface AtorRepository extends CrudRepository<Ator, Integer> {
 
-    Ator findByNome();
+    Ator findByNome(String nome);
     List<Ator> findAll();
 }
