@@ -21,6 +21,10 @@ public class AtorService {
 
     public void criarAtor(AtorRequest atorRequest) throws Exception {
 
+        if (atorRequest.getNome().split(" ").length < 2) {
+            throw new NomeSobrenomeObrigatorioException("ator");
+        }
+
         if (atorRequest.getAnoInicioAtividade() < atorRequest.getDataNascimento().getYear()) {
             throw new AnoInicioAtividadeInvalidoException("ator");
         }
