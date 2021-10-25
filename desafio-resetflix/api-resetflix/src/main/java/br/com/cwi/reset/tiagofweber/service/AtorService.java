@@ -39,37 +39,16 @@ public class AtorService {
 
     public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
 
-        List<Ator> atores = atorRepository.findAll();
-        List<Ator> atoresEmAtividade = new ArrayList<>();
-        List<AtorEmAtividade> atoresFiltrados = new ArrayList<>();
+        List<AtorEmAtividade> atores = atorRepository.findByNomeContainingIgnoreCaseAndStatusCarreiraEquals(filtroNome, StatusCarreira.EM_ATIVIDADE);
 
-        if (atores.size() == 0) {
+        if (atores == null) {
             throw new AtorNaoEncontradoException();
         }
-
-        for (Ator ator: atores) {
-            if (ator.getStatusCarreira().equals(StatusCarreira.EM_ATIVIDADE)) {
-                atoresEmAtividade.add(ator);
-            }
-        }
-
-        if (filtroNome.equals("")) {
-            for (Ator ator: atoresEmAtividade) {
-                atoresFiltrados.add(new AtorEmAtividade(ator.getId(), ator.getNome(), ator.getDataNascimento()));
-            }
-        } else {
-            for (Ator ator: atoresEmAtividade) {
-                if (ator.getNome().contains(filtroNome)) {
-                    atoresFiltrados.add(new AtorEmAtividade(ator.getId(), ator.getNome(), ator.getDataNascimento()));
-                }
-            }
-        }
-
-        if (atoresFiltrados.size() == 0) {
+        if (atores.size() == 0) {
             throw new FiltroNomeNaoEncontradoException("ator", filtroNome);
         }
 
-        return atoresFiltrados;
+        return atores;
     }
 
     public Optional<Ator> consultarAtor(Integer id) throws Exception {
