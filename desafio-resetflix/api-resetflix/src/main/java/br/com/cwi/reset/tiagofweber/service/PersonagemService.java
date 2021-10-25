@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonagemService {
@@ -25,7 +26,7 @@ public class PersonagemService {
 
         for (PersonagemRequest personagemRequest : personagensRequest) {
 
-            Ator ator = atorService.consultarAtor(personagemRequest.getIdAtor());
+            Optional<Ator> ator = atorService.consultarAtor(personagemRequest.getIdAtor());
 
             if (ator == null) {
                 throw new IdNaoEncontradoException("ator", personagemRequest.getIdAtor());

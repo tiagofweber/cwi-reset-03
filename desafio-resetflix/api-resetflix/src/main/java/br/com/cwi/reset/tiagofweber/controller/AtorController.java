@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/atores")
@@ -30,7 +31,7 @@ public class AtorController {
     }
 
     @GetMapping("/{id}")
-    public Ator consultarAtor(@PathVariable Integer id) throws Exception {
+    public Optional<Ator> consultarAtor(@PathVariable Integer id) throws Exception {
         return atorService.consultarAtor(id);
     }
 

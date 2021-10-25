@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AtorService {
@@ -73,21 +74,17 @@ public class AtorService {
         return atoresFiltrados;
     }
 
-    public Ator consultarAtor(Integer id) throws Exception {
+    public Optional<Ator> consultarAtor(Integer id) throws Exception {
         if (id == null) {
             throw new IdNaoInformadoException();
         }
-        List<Ator> atores = atorRepository.findAll();
-        Ator atorEncontrado = null;
-        for (Ator ator: atores) {
-            if (ator.getId().equals(id)) {
-                atorEncontrado = ator;
-            }
-        }
-        if (atorEncontrado == null) {
+
+        Optional<Ator> ator = atorRepository.findById(id);
+
+        if (ator == null) {
             throw new IdNaoEncontradoException("ator", id);
         }
-        return atorEncontrado;
+        return ator;
     }
 
     public List<Ator> consultarAtores() throws Exception {
