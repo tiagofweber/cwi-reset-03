@@ -28,12 +28,10 @@ public class DiretorService {
             throw new AnoInicioAtividadeInvalidoException("diretor");
         }
 
-        List<Diretor> diretores = diretorRepository.findAll();
+        Diretor diretorJaExistente = diretorRepository.findByNome(diretorRequest.getNome());
 
-        for (Diretor diretorCadastrado: diretores) {
-            if (diretorCadastrado.getNome().equals(diretorRequest.getNome())) {
-                throw new CadastroDuplicadoException("diretor", diretorRequest.getNome());
-            }
+        if (diretorJaExistente != null) {
+            throw new CadastroDuplicadoException("diretor", diretorRequest.getNome());
         }
 
         Diretor diretor = new Diretor(
