@@ -3,6 +3,7 @@ package br.com.cwi.reset.tiagofweber.service;
 import br.com.cwi.reset.tiagofweber.FakeDatabase;
 import br.com.cwi.reset.tiagofweber.exception.*;
 import br.com.cwi.reset.tiagofweber.model.Estudio;
+import br.com.cwi.reset.tiagofweber.repository.EstudioRepository;
 import br.com.cwi.reset.tiagofweber.request.EstudioRequest;
 
 import java.time.LocalDate;
@@ -11,15 +12,9 @@ import java.util.List;
 
 public class EstudioService {
 
-    private FakeDatabase fakeDatabase;
+    private EstudioRepository estudioRepository;
 
-    public EstudioService(FakeDatabase fakeDatabase) {
-        this.fakeDatabase = fakeDatabase;
-    }
-
-    /*public void criarEstudio(EstudioRequest estudioRequest) throws Exception {
-
-        Integer novoId = fakeDatabase.recuperaEstudios().size() + 1;
+    public void criarEstudio(EstudioRequest estudioRequest) throws Exception {
 
         if (estudioRequest.getNome() == null || estudioRequest.getNome().equals("")) {
             throw new NomeNaoInformadoException();
@@ -34,7 +29,7 @@ public class EstudioService {
             throw new CampoNaoInformadoException("status de atividade");
         }
 
-        List<Estudio> estudios = fakeDatabase.recuperaEstudios();
+        List<Estudio> estudios = estudioRepository.findAll();
 
         for (Estudio estudio : estudios) {
             if (estudio.getNome().equals(estudioRequest.getNome())) {
@@ -46,14 +41,19 @@ public class EstudioService {
             throw new DataCriacaoInvalidaException();
         }
 
-        Estudio estudio = new Estudio(novoId, estudioRequest.getNome(), estudioRequest.getDescricao(), estudioRequest.getDataCriacao(), estudioRequest.getStatusAtividade());
+        Estudio estudio = new Estudio(
+                estudioRequest.getNome(),
+                estudioRequest.getDescricao(),
+                estudioRequest.getDataCriacao(),
+                estudioRequest.getStatusAtividade()
+        );
 
-        fakeDatabase.persisteEstudio(estudio);
-    }*/
+        estudioRepository.save(estudio);
+    }
 
     public List<Estudio> consultarEstudios(String filtroNome) throws Exception {
 
-        List<Estudio> estudios = fakeDatabase.recuperaEstudios();
+        List<Estudio> estudios = estudioRepository.findAll();
         List<Estudio> estudiosFiltrados = new ArrayList<>();
 
         if (!filtroNome.equals("")) {
@@ -77,7 +77,7 @@ public class EstudioService {
 
     public Estudio consultarEstudio(Integer id) throws Exception {
 
-        List<Estudio> estudios = fakeDatabase.recuperaEstudios();
+        List<Estudio> estudios = estudioRepository.findAll();
 
         if (id == null) {
             throw new IdNaoInformadoException();
