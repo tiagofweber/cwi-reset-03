@@ -21,6 +21,10 @@ public class AtorService {
 
     public void criarAtor(AtorRequest atorRequest) throws Exception {
 
+        if (atorRequest.getAnoInicioAtividade() < atorRequest.getDataNascimento().getYear()) {
+            throw new AnoInicioAtividadeInvalidoException("ator");
+        }
+
         Ator atorJaExistente = atorRepository.findByNome(atorRequest.getNome());
 
         if (atorJaExistente != null) {
