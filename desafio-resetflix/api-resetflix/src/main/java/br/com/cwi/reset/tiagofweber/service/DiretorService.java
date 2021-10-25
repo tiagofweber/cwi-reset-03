@@ -1,6 +1,5 @@
 package br.com.cwi.reset.tiagofweber.service;
 
-import br.com.cwi.reset.tiagofweber.FakeDatabase;
 import br.com.cwi.reset.tiagofweber.exception.*;
 import br.com.cwi.reset.tiagofweber.model.Diretor;
 import br.com.cwi.reset.tiagofweber.repository.DiretorRepository;
@@ -8,8 +7,6 @@ import br.com.cwi.reset.tiagofweber.request.DiretorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,16 +59,12 @@ public class DiretorService {
         if (id == null) {
             throw new IdNaoInformadoException();
         }
-        List<Diretor> diretores = diretorRepository.findAll();
-        Diretor diretorEncontrado = null;
-        for (Diretor diretor: diretores) {
-            if (diretor.getId().equals(id)) {
-                diretorEncontrado = diretor;
-            }
-        }
-        if (diretorEncontrado == null) {
+
+        Diretor diretor = diretorRepository.findByIdEquals(id);
+
+        if (diretor == null) {
             throw new IdNaoEncontradoException("diretor", id);
         }
-        return diretorEncontrado;
+        return diretor;
     }
 }
