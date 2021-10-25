@@ -5,6 +5,7 @@ import br.com.cwi.reset.tiagofweber.model.Diretor;
 import br.com.cwi.reset.tiagofweber.request.DiretorRequest;
 import br.com.cwi.reset.tiagofweber.service.DiretorService;
 import ch.qos.logback.core.encoder.EchoEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +15,8 @@ import java.util.List;
 @RequestMapping("/diretores")
 public class DiretorController {
 
+    @Autowired
     private DiretorService diretorService;
-
-    public DiretorController() {
-        this.diretorService = new DiretorService(FakeDatabase.getInstance());
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

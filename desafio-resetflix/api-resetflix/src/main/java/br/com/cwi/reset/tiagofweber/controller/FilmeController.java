@@ -4,6 +4,7 @@ import br.com.cwi.reset.tiagofweber.FakeDatabase;
 import br.com.cwi.reset.tiagofweber.model.Filme;
 import br.com.cwi.reset.tiagofweber.request.FilmeRequest;
 import br.com.cwi.reset.tiagofweber.service.FilmeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,8 @@ import java.util.List;
 @RequestMapping("/filmes")
 public class FilmeController {
 
+    @Autowired
     private FilmeService filmeService;
-
-    public FilmeController() {
-        this.filmeService = new FilmeService(FakeDatabase.getInstance());
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
