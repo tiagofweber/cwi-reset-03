@@ -45,20 +45,10 @@ public class DiretorService {
 
     public List<Diretor> listarDiretores(String filtroNome) throws Exception {
         List<Diretor> diretores = diretorRepository.findAll();
-        List<Diretor> diretoresFiltrados = new ArrayList<>();
+        List<Diretor> diretoresFiltrados = diretorRepository.findByNomeContaining(filtroNome);
 
         if (diretores.size() == 0) {
             throw new DiretorNaoEncontradoException();
-        }
-
-        for (Diretor diretor: diretores) {
-            if (filtroNome.equals("")) {
-                diretoresFiltrados.add(diretor);
-            } else {
-                if (diretor.getNome().contains(filtroNome)) {
-                    diretoresFiltrados.add(diretor);
-                }
-            }
         }
 
         if (diretoresFiltrados.size() == 0) {

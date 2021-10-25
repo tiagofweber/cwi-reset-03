@@ -10,5 +10,6 @@ import java.util.List;
 public interface DiretorRepository extends CrudRepository<Diretor, Integer> {
 
     Diretor findByNome(String nome);
+    List<Diretor> findByNomeContaining(String filtroNome);
     List<Diretor> findAll();
 }
