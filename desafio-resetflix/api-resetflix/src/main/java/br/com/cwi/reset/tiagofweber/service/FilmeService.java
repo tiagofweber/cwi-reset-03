@@ -5,29 +5,32 @@ import br.com.cwi.reset.tiagofweber.exception.CadastroDuplicadoException;
 import br.com.cwi.reset.tiagofweber.exception.FilmeNaoCadastradoException;
 import br.com.cwi.reset.tiagofweber.exception.FilmeNaoEncontradoException;
 import br.com.cwi.reset.tiagofweber.model.*;
+import br.com.cwi.reset.tiagofweber.repository.DiretorRepository;
+import br.com.cwi.reset.tiagofweber.repository.FilmeRepository;
+import br.com.cwi.reset.tiagofweber.repository.PersonagemAtorRepository;
 import br.com.cwi.reset.tiagofweber.request.FilmeRequest;
 import br.com.cwi.reset.tiagofweber.validator.Validacao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class FilmeService {
 
-    private FakeDatabase fakeDatabase;
+    @Autowired
+    private FilmeRepository filmeRepository;
+    @Autowired
+    private DiretorService diretorService;
+    @Autowired
+    private EstudioService estudioService;
+    @Autowired
+    private PersonagemService personagemService;
 
-    public FilmeService(FakeDatabase fakeDatabase) {
-        this.fakeDatabase = fakeDatabase;
-    }
+    public void criarFilme(FilmeRequest filmeRequest) throws Exception {
 
-    PersonagemService personagemService = new PersonagemService(FakeDatabase.getInstance());
-    DiretorService diretorService = new DiretorService(FakeDatabase.getInstance());
-    EstudioService estudioService = new EstudioService(FakeDatabase.getInstance());
-
-    /*public void criarFilme(FilmeRequest filmeRequest) throws Exception {
-
-        Integer novoId = fakeDatabase.recuperaFilmes().size() + 1;
-
-        List<Filme> filmes = fakeDatabase.recuperaFilmes();
+        List<Filme> filmes = filmeRepository.findAll();
 
         for (Filme filme : filmes) {
             if (filme.getNome().equals(filmeRequest.getNome())) {
@@ -36,7 +39,7 @@ public class FilmeService {
         }
 
         Validacao.validarPersonagens(filmeRequest.getPersonagens());
-//        List<PersonagemAtor> personagens = personagemService.criarPersonagens(filmeRequest.getPersonagens());
+        List<PersonagemAtor> personagens = personagemService.criarPersonagens(filmeRequest.getPersonagens());
 
         Validacao.validarString(TipoDado.NOME, filmeRequest.getNome());
         Validacao.validarInteger(TipoDado.ANO_LANCAMENTO, filmeRequest.getAnoLancamento());
@@ -47,23 +50,22 @@ public class FilmeService {
         Validacao.validarString(TipoDado.RESUMO, filmeRequest.getResumo());
         
         Filme filme = new Filme(
-                novoId,
                 filmeRequest.getNome(),
                 filmeRequest.getAnoLancamento(),
                 filmeRequest.getCapaFilme(),
                 filmeRequest.getGeneros(),
-                diretorService.consultarDiretor(filmeRequest.getIdDiretor()),
                 estudioService.consultarEstudio(filmeRequest.getIdEstudio()),
+                diretorService.consultarDiretor(filmeRequest.getIdDiretor()),
                 personagens,
                 filmeRequest.getResumo()
         );
 
-        fakeDatabase.persisteFilme(filme);
-    }*/
+        filmeRepository.save(filme);
+    }
 
     public List<Filme> consultarFilmes(String nomeFilme, String nomeDiretor, String nomePersonagem, String nomeAtor) throws Exception {
 
-        List<Filme> filmes = fakeDatabase.recuperaFilmes();
+        List<Filme> filmes = filmeRepository.findAll();
 
         if (filmes.isEmpty()) {
             throw new FilmeNaoCadastradoException();

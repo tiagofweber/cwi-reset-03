@@ -5,13 +5,17 @@ import br.com.cwi.reset.tiagofweber.exception.*;
 import br.com.cwi.reset.tiagofweber.model.Estudio;
 import br.com.cwi.reset.tiagofweber.repository.EstudioRepository;
 import br.com.cwi.reset.tiagofweber.request.EstudioRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class EstudioService {
 
+    @Autowired
     private EstudioRepository estudioRepository;
 
     public void criarEstudio(EstudioRequest estudioRequest) throws Exception {
