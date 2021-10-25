@@ -18,7 +18,6 @@ public class AtorService {
     @Autowired
     private AtorRepository atorRepository;
 
-    // Demais métodos da classe
     public void criarAtor(AtorRequest atorRequest) throws Exception {
 
         List<Ator> atores = atorRepository.findAll();

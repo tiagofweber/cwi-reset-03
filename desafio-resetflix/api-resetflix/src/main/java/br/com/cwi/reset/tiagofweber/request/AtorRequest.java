@@ -2,13 +2,18 @@ package br.com.cwi.reset.tiagofweber.request;
 
 import br.com.cwi.reset.tiagofweber.model.StatusCarreira;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class AtorRequest {
 
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo nome")
     private String nome;
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo data de nascimento")
     private LocalDate dataNascimento;
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo status carreira")
     private StatusCarreira statusCarreira;
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo ano de início de atividade")
     private Integer anoInicioAtividade;
 
     public AtorRequest(String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
