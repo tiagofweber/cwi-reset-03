@@ -60,11 +60,10 @@ public class DiretorService {
             throw new IdNaoInformadoException();
         }
 
-        Diretor diretor = diretorRepository.findByIdEquals(id);
-
-        if (diretor == null) {
+        if (!diretorRepository.existsById(id)) {
             throw new IdNaoEncontradoException("diretor", id);
         }
-        return diretor;
+
+        return diretorRepository.findByIdEquals(id);
     }
 }

@@ -20,29 +20,12 @@ public class EstudioService {
 
     public void criarEstudio(EstudioRequest estudioRequest) throws Exception {
 
-        if (estudioRequest.getNome() == null || estudioRequest.getNome().equals("")) {
-            throw new NomeNaoInformadoException();
-        }
-        if (estudioRequest.getDescricao() == null || estudioRequest.getDescricao().equals("")) {
-            throw new DescricaoNaoInformadaException();
-        }
-        if (estudioRequest.getDataCriacao() == null) {
-            throw new DataCriacaoNaoInformadaException();
-        }
-        if (estudioRequest.getStatusAtividade() == null) {
-            throw new CampoNaoInformadoException("status de atividade");
-        }
-
         List<Estudio> estudios = estudioRepository.findAll();
 
         for (Estudio estudio : estudios) {
             if (estudio.getNome().equals(estudioRequest.getNome())) {
                 throw new CadastroDuplicadoException("estudio", estudioRequest.getNome());
             }
-        }
-
-        if (estudioRequest.getDataCriacao().isAfter(LocalDate.now())) {
-            throw new DataCriacaoInvalidaException();
         }
 
         Estudio estudio = new Estudio(
