@@ -59,12 +59,12 @@ public class AtorService {
         return atores;
     }
 
-    public Optional<Ator> consultarAtor(Integer id) throws Exception {
+    public Ator consultarAtor(Integer id) throws Exception {
         if (id == null) {
             throw new IdNaoInformadoException();
         }
 
-        Optional<Ator> ator = atorRepository.findById(id);
+        Ator ator = atorRepository.findByIdEquals(id);
 
         if (ator == null) {
             throw new IdNaoEncontradoException("ator", id);

@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface AtorRepository extends CrudRepository<Ator, Integer> {
 
+    Ator findByIdEquals(Integer id);
     Ator findByNome(String nome);
     List<AtorEmAtividade> findByNomeContainingIgnoreCaseAndStatusCarreiraEquals(String filtroNome, StatusCarreira statusCarreira);
     List<Ator> findAll();

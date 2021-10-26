@@ -31,7 +31,7 @@ public class AtorController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Ator> consultarAtor(@PathVariable Integer id) throws Exception {
+    public Ator consultarAtor(@PathVariable Integer id) throws Exception {
         return atorService.consultarAtor(id);
     }
 
