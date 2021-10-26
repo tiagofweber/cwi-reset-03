@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface FilmeRepository extends CrudRepository<Filme, Integer> {
 
+    Filme findByNome(String nome);
     List<Filme> findAll();
 }

@@ -46,9 +46,6 @@ public class Validacao {
     }
 
     public static void validarPersonagens(List<PersonagemRequest> personagens) throws Exception {
-        if (personagens == null || personagens.isEmpty()) {
-            throw new CampoNaoInformadoException(TipoDado.PERSONAGENS.getDescricao());
-        }
         int contador = 0;
         for (int i = 0; i < personagens.size(); i++) {
             for (int j = 0; j < personagens.size(); j++) {

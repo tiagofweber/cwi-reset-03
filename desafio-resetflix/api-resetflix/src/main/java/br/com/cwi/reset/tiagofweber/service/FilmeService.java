@@ -1,13 +1,10 @@
 package br.com.cwi.reset.tiagofweber.service;
 
-import br.com.cwi.reset.tiagofweber.FakeDatabase;
 import br.com.cwi.reset.tiagofweber.exception.CadastroDuplicadoException;
 import br.com.cwi.reset.tiagofweber.exception.FilmeNaoCadastradoException;
 import br.com.cwi.reset.tiagofweber.exception.FilmeNaoEncontradoException;
 import br.com.cwi.reset.tiagofweber.model.*;
-import br.com.cwi.reset.tiagofweber.repository.DiretorRepository;
 import br.com.cwi.reset.tiagofweber.repository.FilmeRepository;
-import br.com.cwi.reset.tiagofweber.repository.PersonagemAtorRepository;
 import br.com.cwi.reset.tiagofweber.request.FilmeRequest;
 import br.com.cwi.reset.tiagofweber.validator.Validacao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,26 +26,15 @@ public class FilmeService {
     private PersonagemService personagemService;
 
     public void criarFilme(FilmeRequest filmeRequest) throws Exception {
+        Filme filmeJaExistente = filmeRepository.findByNome(filmeRequest.getNome());
 
-        List<Filme> filmes = filmeRepository.findAll();
-
-        for (Filme filme : filmes) {
-            if (filme.getNome().equals(filmeRequest.getNome())) {
-                throw new CadastroDuplicadoException("filme", filmeRequest.getNome());
-            }
+        if (filmeJaExistente != null) {
+            throw new CadastroDuplicadoException("filme", filmeRequest.getNome());
         }
 
         Validacao.validarPersonagens(filmeRequest.getPersonagens());
         List<PersonagemAtor> personagens = personagemService.criarPersonagens(filmeRequest.getPersonagens());
 
-        Validacao.validarString(TipoDado.NOME, filmeRequest.getNome());
-        Validacao.validarInteger(TipoDado.ANO_LANCAMENTO, filmeRequest.getAnoLancamento());
-        Validacao.validarString(TipoDado.CAPA_FILME, filmeRequest.getCapaFilme());
-        Validacao.validarGenero(filmeRequest.getGeneros());
-        Validacao.validarInteger(TipoDado.ID_DIRETOR, filmeRequest.getIdDiretor());
-        Validacao.validarInteger(TipoDado.ID_ESTUDIO, filmeRequest.getIdEstudio());
-        Validacao.validarString(TipoDado.RESUMO, filmeRequest.getResumo());
-        
         Filme filme = new Filme(
                 filmeRequest.getNome(),
                 filmeRequest.getAnoLancamento(),
