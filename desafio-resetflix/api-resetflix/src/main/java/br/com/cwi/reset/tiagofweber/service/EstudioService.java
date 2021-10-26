@@ -1,6 +1,5 @@
 package br.com.cwi.reset.tiagofweber.service;
 
-import br.com.cwi.reset.tiagofweber.FakeDatabase;
 import br.com.cwi.reset.tiagofweber.exception.*;
 import br.com.cwi.reset.tiagofweber.model.Estudio;
 import br.com.cwi.reset.tiagofweber.repository.EstudioRepository;
@@ -8,7 +7,6 @@ import br.com.cwi.reset.tiagofweber.request.EstudioRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +18,10 @@ public class EstudioService {
 
     public void criarEstudio(EstudioRequest estudioRequest) throws Exception {
 
-        List<Estudio> estudios = estudioRepository.findAll();
+        Estudio estudioJaExistente = estudioRepository.findByNome(estudioRequest.getNome());
 
-        for (Estudio estudio : estudios) {
-            if (estudio.getNome().equals(estudioRequest.getNome())) {
-                throw new CadastroDuplicadoException("estudio", estudioRequest.getNome());
-            }
+        if (estudioJaExistente != null) {
+            throw new CadastroDuplicadoException("estudio", estudioRequest.getNome());
         }
 
         Estudio estudio = new Estudio(
