@@ -10,5 +10,6 @@ import java.util.List;
 public interface EstudioRepository extends CrudRepository<Estudio, Integer> {
 
     Estudio findByNome(String nome);
+    List<Estudio> findByNomeContaining(String filtroNome);
     List<Estudio> findAll();
 }

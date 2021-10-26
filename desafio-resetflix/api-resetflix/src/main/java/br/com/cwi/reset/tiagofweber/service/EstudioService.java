@@ -37,25 +37,21 @@ public class EstudioService {
     public List<Estudio> consultarEstudios(String filtroNome) throws Exception {
 
         List<Estudio> estudios = estudioRepository.findAll();
-        List<Estudio> estudiosFiltrados = new ArrayList<>();
-
-        if (!filtroNome.equals("")) {
-            for (Estudio estudio : estudios) {
-                if (estudio.getNome().contains(filtroNome)) {
-                    estudiosFiltrados.add(estudio);
-                }
-            }
-            if (estudiosFiltrados.size() == 0) {
-                throw new FiltroNomeNaoEncontradoException("Estúdio", filtroNome);
-            }
-            return estudiosFiltrados;
-        }
+        List<Estudio> estudiosFiltrados = estudioRepository.findByNomeContaining(filtroNome);
 
         if (estudios.size() == 0) {
             throw new EstudioNaoCadastradoException();
         }
 
-        return estudios;
+        if (filtroNome.equals("")) {
+            return estudios;
+        }
+
+        if (estudiosFiltrados.size() == 0) {
+            throw new FiltroNomeNaoEncontradoException("Estúdio", filtroNome);
+        }
+
+        return estudiosFiltrados;
     }
 
     public Estudio consultarEstudio(Integer id) throws Exception {
