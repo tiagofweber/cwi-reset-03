@@ -55,20 +55,17 @@ public class EstudioService {
     }
 
     public Estudio consultarEstudio(Integer id) throws Exception {
-
-        List<Estudio> estudios = estudioRepository.findAll();
-
         if (id == null) {
             throw new IdNaoInformadoException();
         }
 
-        for (Estudio estudio : estudios) {
-            if (estudio.getId() == id) {
-                return estudio;
-            }
+        Estudio estudio = estudioRepository.findByIdEquals(id);
+
+        if (estudio == null) {
+            throw new IdNaoEncontradoException("Estúdio", id);
         }
 
-        throw new IdNaoEncontradoException("Estúdio", id);
+        return estudio;
     }
 
 

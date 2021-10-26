@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface EstudioRepository extends CrudRepository<Estudio, Integer> {
 
+    Estudio findByIdEquals(Integer id);
     Estudio findByNome(String nome);
     List<Estudio> findByNomeContaining(String filtroNome);
     List<Estudio> findAll();
