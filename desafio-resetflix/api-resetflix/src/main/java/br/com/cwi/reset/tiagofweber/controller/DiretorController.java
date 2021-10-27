@@ -32,4 +32,9 @@ public class DiretorController {
     public Diretor consultarDiretor(@PathVariable Integer id) throws Exception {
         return diretorService.consultarDiretor(id);
     }
+
+    @PutMapping("/{id}")
+    public void atualizarDiretor(@PathVariable Integer id, @RequestBody @Valid DiretorRequest diretorRequest) throws Exception {
+        diretorService.atualizarDiretor(id, diretorRequest);
+    }
 }

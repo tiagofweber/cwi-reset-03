@@ -1,6 +1,7 @@
 package br.com.cwi.reset.tiagofweber.service;
 
 import br.com.cwi.reset.tiagofweber.exception.*;
+import br.com.cwi.reset.tiagofweber.model.Ator;
 import br.com.cwi.reset.tiagofweber.model.Diretor;
 import br.com.cwi.reset.tiagofweber.repository.DiretorRepository;
 import br.com.cwi.reset.tiagofweber.request.DiretorRequest;
@@ -17,19 +18,7 @@ public class DiretorService {
 
     public void cadastrarDiretor(DiretorRequest diretorRequest) throws Exception {
 
-        if (diretorRequest.getNome().split(" ").length < 2) {
-            throw new NomeSobrenomeObrigatorioException("diretor");
-        }
-
-        if (diretorRequest.getAnoInicioAtividade() <= diretorRequest.getDataNascimento().getYear()) {
-            throw new AnoInicioAtividadeInvalidoException("diretor");
-        }
-
-        Diretor diretorJaExistente = diretorRepository.findByNome(diretorRequest.getNome());
-
-        if (diretorJaExistente != null) {
-            throw new CadastroDuplicadoException("diretor", diretorRequest.getNome());
-        }
+        validarDiretorRequest(diretorRequest);
 
         Diretor diretor = new Diretor(
                 diretorRequest.getNome(),
@@ -65,5 +54,38 @@ public class DiretorService {
         }
 
         return diretorRepository.findByIdEquals(id);
+    }
+
+    public void atualizarDiretor(Integer id, DiretorRequest diretorRequest) throws Exception {
+        if (!diretorRepository.existsById(id)) {
+            throw new IdNaoEncontradoException("diretor", id);
+        }
+
+        validarDiretorRequest(diretorRequest);
+
+        Diretor diretor = new Diretor(
+                diretorRequest.getNome(),
+                diretorRequest.getDataNascimento(),
+                diretorRequest.getAnoInicioAtividade()
+        );
+
+        diretor.setId(id);
+        diretorRepository.save(diretor);
+    }
+
+    private void validarDiretorRequest(DiretorRequest diretorRequest) throws Exception {
+        if (diretorRequest.getNome().split(" ").length < 2) {
+            throw new NomeSobrenomeObrigatorioException("diretor");
+        }
+
+        if (diretorRequest.getAnoInicioAtividade() <= diretorRequest.getDataNascimento().getYear()) {
+            throw new AnoInicioAtividadeInvalidoException("diretor");
+        }
+
+        Diretor diretorJaExistente = diretorRepository.findByNome(diretorRequest.getNome());
+
+        if (diretorJaExistente != null) {
+            throw new CadastroDuplicadoException("diretor", diretorRequest.getNome());
+        }
     }
 }
