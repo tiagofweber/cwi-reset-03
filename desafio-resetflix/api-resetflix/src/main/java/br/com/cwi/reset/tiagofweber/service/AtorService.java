@@ -21,19 +21,7 @@ public class AtorService {
 
     public void criarAtor(AtorRequest atorRequest) throws Exception {
 
-        if (atorRequest.getNome().split(" ").length < 2) {
-            throw new NomeSobrenomeObrigatorioException("ator");
-        }
-
-        if (atorRequest.getAnoInicioAtividade() < atorRequest.getDataNascimento().getYear()) {
-            throw new AnoInicioAtividadeInvalidoException("ator");
-        }
-
-        Ator atorJaExistente = atorRepository.findByNome(atorRequest.getNome());
-
-        if (atorJaExistente != null) {
-            throw new CadastroDuplicadoException("ator", atorJaExistente.getNome());
-        }
+        validarAtorRequest(atorRequest);
 
         Ator ator = new Ator(
                 atorRequest.getNome(),
@@ -78,5 +66,40 @@ public class AtorService {
             throw new AtorNaoEncontradoException();
         }
         return atores;
+    }
+
+    public void atualizarAtor(Integer id, AtorRequest atorRequest) throws Exception {
+
+        if (!atorRepository.existsById(id)) {
+            throw new IdNaoEncontradoException("ator", id);
+        }
+
+        validarAtorRequest(atorRequest);
+
+        Ator ator = new Ator(
+                atorRequest.getNome(),
+                atorRequest.getDataNascimento(),
+                atorRequest.getStatusCarreira(),
+                atorRequest.getAnoInicioAtividade()
+        );
+
+        ator.setId(id);
+        atorRepository.save(ator);
+    }
+
+    private void validarAtorRequest(AtorRequest atorRequest) throws Exception {
+        if (atorRequest.getNome().split(" ").length < 2) {
+            throw new NomeSobrenomeObrigatorioException("ator");
+        }
+
+        if (atorRequest.getAnoInicioAtividade() < atorRequest.getDataNascimento().getYear()) {
+            throw new AnoInicioAtividadeInvalidoException("ator");
+        }
+
+        Ator atorJaExistente = atorRepository.findByNome(atorRequest.getNome());
+
+        if (atorJaExistente != null) {
+            throw new CadastroDuplicadoException("ator", atorJaExistente.getNome());
+        }
     }
 }
