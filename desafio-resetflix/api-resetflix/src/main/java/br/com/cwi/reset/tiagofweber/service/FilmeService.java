@@ -115,6 +115,12 @@ public class FilmeService {
 
         Filme filme = filmeRepository.findById(id).get();
 
+        List<PersonagemAtor> personagens = filme.getPersonagens();
+
+        for (PersonagemAtor personagem : personagens) {
+            personagemService.removerPersonagem(personagem);
+        }
+
         filmeRepository.delete(filme);
     }
 }

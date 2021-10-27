@@ -44,4 +44,8 @@ public class PersonagemService {
         }
         return personagens;
     }
+
+    public void removerPersonagem(PersonagemAtor personagemAtor) {
+        personagemAtorRepository.delete(personagemAtor);
+    }
 }
