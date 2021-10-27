@@ -1,8 +1,6 @@
 package br.com.cwi.reset.tiagofweber.service;
 
-import br.com.cwi.reset.tiagofweber.exception.CadastroDuplicadoException;
-import br.com.cwi.reset.tiagofweber.exception.FilmeNaoCadastradoException;
-import br.com.cwi.reset.tiagofweber.exception.FilmeNaoEncontradoException;
+import br.com.cwi.reset.tiagofweber.exception.*;
 import br.com.cwi.reset.tiagofweber.model.*;
 import br.com.cwi.reset.tiagofweber.repository.FilmeRepository;
 import br.com.cwi.reset.tiagofweber.request.FilmeRequest;
@@ -104,5 +102,19 @@ public class FilmeService {
         }
 
         return filmesFiltrados;
+    }
+
+    public void removerFilme(Integer id) throws Exception {
+        if (id == null) {
+            throw new IdNaoInformadoException();
+        }
+
+        if (!filmeRepository.existsById(id)) {
+            throw new IdNaoEncontradoException("filme", id);
+        }
+
+        Filme filme = filmeRepository.findById(id).get();
+
+        filmeRepository.delete(filme);
     }
 }

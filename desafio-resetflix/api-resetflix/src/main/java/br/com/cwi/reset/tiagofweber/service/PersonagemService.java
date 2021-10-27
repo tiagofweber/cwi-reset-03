@@ -2,6 +2,7 @@ package br.com.cwi.reset.tiagofweber.service;
 
 import br.com.cwi.reset.tiagofweber.exception.IdNaoEncontradoException;
 import br.com.cwi.reset.tiagofweber.model.Ator;
+import br.com.cwi.reset.tiagofweber.model.Filme;
 import br.com.cwi.reset.tiagofweber.model.PersonagemAtor;
 import br.com.cwi.reset.tiagofweber.repository.PersonagemAtorRepository;
 import br.com.cwi.reset.tiagofweber.request.PersonagemRequest;
@@ -43,5 +44,4 @@ public class PersonagemService {
         }
         return personagens;
     }
-
 }
