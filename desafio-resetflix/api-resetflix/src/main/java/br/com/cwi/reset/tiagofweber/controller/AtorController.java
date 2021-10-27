@@ -1,5 +1,6 @@
 package br.com.cwi.reset.tiagofweber.controller;
 
+import br.com.cwi.reset.tiagofweber.exception.IdNaoInformadoException;
 import br.com.cwi.reset.tiagofweber.model.Ator;
 import br.com.cwi.reset.tiagofweber.request.AtorRequest;
 import br.com.cwi.reset.tiagofweber.response.AtorEmAtividade;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -43,5 +45,10 @@ public class AtorController {
     @PutMapping("/{id}")
     public void atualizarAtor(@PathVariable Integer id, @RequestBody @Valid AtorRequest atorRequest) throws Exception {
         atorService.atualizarAtor(id, atorRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removerAtor(@PathVariable Integer id) throws Exception {
+        atorService.removerAtor(id);
     }
 }

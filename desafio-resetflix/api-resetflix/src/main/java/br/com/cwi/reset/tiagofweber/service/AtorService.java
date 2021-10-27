@@ -2,8 +2,10 @@ package br.com.cwi.reset.tiagofweber.service;
 
 import br.com.cwi.reset.tiagofweber.exception.*;
 import br.com.cwi.reset.tiagofweber.model.Ator;
+import br.com.cwi.reset.tiagofweber.model.PersonagemAtor;
 import br.com.cwi.reset.tiagofweber.model.StatusCarreira;
 import br.com.cwi.reset.tiagofweber.repository.AtorRepository;
+import br.com.cwi.reset.tiagofweber.repository.PersonagemAtorRepository;
 import br.com.cwi.reset.tiagofweber.request.AtorRequest;
 import br.com.cwi.reset.tiagofweber.response.AtorEmAtividade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class AtorService {
 
     @Autowired
     private AtorRepository atorRepository;
+    @Autowired
+    private PersonagemAtorRepository personagemAtorRepository;
 
     public void criarAtor(AtorRequest atorRequest) throws Exception {
 
@@ -101,5 +105,28 @@ public class AtorService {
         if (atorJaExistente != null) {
             throw new CadastroDuplicadoException("ator", atorJaExistente.getNome());
         }
+    }
+
+    public void removerAtor(Integer id) throws Exception {
+        if (id == null) {
+            throw new IdNaoInformadoException();
+        }
+
+        if (!atorRepository.existsById(id)) {
+            throw new IdNaoEncontradoException("ator", id);
+        }
+
+        Ator ator = atorRepository.findByIdEquals(id);
+        List<PersonagemAtor> personagens = (List<PersonagemAtor>) personagemAtorRepository.findAll();
+
+        for (PersonagemAtor personagem : personagens) {
+            if (personagem.getAtor().equals(ator)) {
+                throw new AtorVinculadoException();
+            }
+        }
+
+
+
+        atorRepository.delete(ator);
     }
 }
