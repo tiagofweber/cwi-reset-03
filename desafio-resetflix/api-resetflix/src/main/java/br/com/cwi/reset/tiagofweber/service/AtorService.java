@@ -125,8 +125,6 @@ public class AtorService {
             }
         }
 
-
-
         atorRepository.delete(ator);
     }
 }

@@ -34,7 +34,15 @@ public class DiretorController {
     }
 
     @PutMapping("/{id}")
-    public void atualizarDiretor(@PathVariable Integer id, @RequestBody @Valid DiretorRequest diretorRequest) throws Exception {
+    public void atualizarDiretor(
+            @PathVariable Integer id,
+            @RequestBody @Valid DiretorRequest diretorRequest
+    ) throws Exception {
         diretorService.atualizarDiretor(id, diretorRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removerDiretores(@PathVariable Integer id) throws Exception {
+        diretorService.removerDiretores(id);
     }
 }
