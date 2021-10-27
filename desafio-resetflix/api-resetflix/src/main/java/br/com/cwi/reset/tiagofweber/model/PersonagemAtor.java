@@ -2,7 +2,6 @@ package br.com.cwi.reset.tiagofweber.model;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Optional;
 
 @Entity
 public class PersonagemAtor {
@@ -17,7 +16,7 @@ public class PersonagemAtor {
     @Enumerated(EnumType.STRING)
     private TipoAtuacao tipoAtuacao;
 
-    public PersonagemAtor(Optional<Ator> ator, String nomePersonagem, String descricaoPersonagem, TipoAtuacao tipoAtuacao) {
+    public PersonagemAtor() {
     }
 
     public PersonagemAtor(Ator ator, String nomePersonagem, String descricaoPersonagem, TipoAtuacao tipoAtuacao) {
