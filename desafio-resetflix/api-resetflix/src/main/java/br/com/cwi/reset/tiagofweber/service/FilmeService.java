@@ -29,6 +29,7 @@ public class FilmeService {
             throw new CadastroDuplicadoException("filme", filmeRequest.getNome());
         }
 
+        Validacao.validarGeneros(filmeRequest.getGeneros());
         Validacao.validarPersonagens(filmeRequest.getPersonagens());
         List<PersonagemAtor> personagens = personagemService.criarPersonagens(filmeRequest.getPersonagens());
 

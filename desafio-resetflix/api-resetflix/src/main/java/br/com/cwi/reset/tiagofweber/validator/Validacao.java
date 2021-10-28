@@ -28,4 +28,20 @@ public class Validacao {
             contador = 0;
         }
     }
+
+    public static void validarGeneros(List<Genero> generos) throws Exception {
+        int contador = 0;
+
+        for (int i = 0; i < generos.size(); i++) {
+            for (int j = 0; j < generos.size(); j++) {
+                if (generos.get(i).equals(generos.get(j))) {
+                    contador++;
+                }
+            }
+            if (contador > 1) {
+                throw new GeneroDuplicadoException();
+            }
+            contador = 0;
+        }
+    }
 }

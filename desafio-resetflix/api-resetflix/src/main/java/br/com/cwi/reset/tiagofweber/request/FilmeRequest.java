@@ -18,6 +18,7 @@ public class FilmeRequest {
     @NotEmpty(message = "Campo obrigatório não informado. Favor informar o campo capa do filme")
     private String capaFilme;
     @NotNull(message = "Campo obrigatório não informado. Favor informar o campo gêneros")
+    @NotEmpty(message = "Campo obrigatório não informado. Favor informar o campo gêneros")
     private List<Genero> generos;
     @NotNull(message = "Campo obrigatório não informado. Favor informar o campo id do diretor")
     private Integer idDiretor;
@@ -27,7 +28,7 @@ public class FilmeRequest {
     @NotEmpty(message = "Campo obrigatório não informado. Favor informar o campo resumo")
     private String resumo;
     @NotNull(message = "Campo obrigatório não informado. Favor informar o campo personagens")
-    @NotEmpty(message = "Deve ser informado pelo menos um gênero para o cadastro do filme")
+    @NotEmpty(message = "Campo obrigatório não informado. Favor informar o campo personagens")
     private List<PersonagemRequest> personagens;
 
     public FilmeRequest(String nome, Integer anoLancamento, String capaFilme, List<Genero> generos, Integer idDiretor, Integer idEstudio, String resumo, List<PersonagemRequest> personagens) {
