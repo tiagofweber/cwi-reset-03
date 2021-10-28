@@ -1,6 +1,5 @@
 package br.com.cwi.reset.tiagofweber.controller;
 
-import br.com.cwi.reset.tiagofweber.FakeDatabase;
 import br.com.cwi.reset.tiagofweber.model.Estudio;
 import br.com.cwi.reset.tiagofweber.request.EstudioRequest;
 import br.com.cwi.reset.tiagofweber.service.EstudioService;
