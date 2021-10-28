@@ -8,8 +8,7 @@ import br.com.cwi.reset.tiagofweber.validator.Validacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class FilmeService {
@@ -47,7 +46,12 @@ public class FilmeService {
         filmeRepository.save(filme);
     }
 
-    public List<Filme> consultarFilmes(String nomeFilme, String nomeDiretor, String nomePersonagem, String nomeAtor) throws Exception {
+    public List<Filme> consultarFilmes(
+            String nomeFilme,
+            String nomeDiretor,
+            String nomePersonagem,
+            String nomeAtor
+    ) throws Exception {
 
         List<Filme> filmes = filmeRepository.findAll();
 
@@ -55,53 +59,38 @@ public class FilmeService {
             throw new FilmeNaoCadastradoException();
         }
 
+        if (nomeFilme.equals("") && nomeDiretor.equals("") && nomePersonagem.equals("") && nomeAtor.equals("")) {
+            return filmes;
+        }
+
         List<Filme> filmesFiltrados = new ArrayList<>();
-
-        filmesFiltrados.addAll(filmes);
-
         if (!nomeFilme.equals("")) {
-            filmesFiltrados.removeIf(filme1 -> !filme1.getNome().contains(nomeFilme));
+            List<Filme> filmesFiltradosPorNome = filmeRepository.findByNomeContainingIgnoreCase(nomeFilme);
+            filmesFiltrados.addAll(filmesFiltradosPorNome);
         }
 
         if (!nomeDiretor.equals("")) {
-            filmesFiltrados.removeIf(filme2 -> !filme2.getDiretor().getNome().contains(nomeDiretor));
+            List<Filme> filmesFiltradosPorDiretor = filmeRepository.findByDiretorNomeContainingIgnoreCase(nomeDiretor);
+            filmesFiltrados.addAll(filmesFiltradosPorDiretor);
         }
 
         if (!nomePersonagem.equals("")) {
-            for (int i = 0; i < filmesFiltrados.size(); i++) {
-                List<PersonagemAtor> personagens = filmesFiltrados.get(i).getPersonagens();
-                boolean personagemEncontrado = false;
-                for (PersonagemAtor personagem : personagens) {
-                    if (personagem.getNomePersonagem().contains(nomePersonagem)) {
-                        personagemEncontrado = true;
-                    }
-                }
-                if (!personagemEncontrado) {
-                    filmesFiltrados.remove(filmesFiltrados.get(i));
-                }
-            }
+            List<Filme> filmesFiltradosPorPersonagem = filmeRepository.findByPersonagensNomePersonagemContainingIgnoreCase(nomePersonagem);
+            filmesFiltrados.addAll(filmesFiltradosPorPersonagem);
         }
 
         if (!nomeAtor.equals("")) {
-            for (int i = 0; i < filmesFiltrados.size(); i++) {
-                List<PersonagemAtor> personagens = filmesFiltrados.get(i).getPersonagens();
-                boolean atorEncontrado = false;
-                for (PersonagemAtor personagem : personagens) {
-                    if (personagem.getAtor().getNome().contains(nomeAtor)) {
-                        atorEncontrado = true;
-                    }
-                }
-                if (!atorEncontrado) {
-                    filmesFiltrados.remove(filmesFiltrados.get(i));
-                }
-            }
+            List<Filme> filmesFiltradosPorAtor = filmeRepository.findByPersonagensAtorNomeContainingIgnoreCase(nomeAtor);
+            filmesFiltrados.addAll(filmesFiltradosPorAtor);
         }
 
-        if (filmesFiltrados.isEmpty()) {
+        List<Filme> filmesFiltradosSemDuplicatas = new ArrayList<>(new HashSet<>(filmesFiltrados));
+
+        if (filmesFiltradosSemDuplicatas.isEmpty()) {
             throw new FilmeNaoEncontradoException(nomeFilme, nomeDiretor, nomePersonagem, nomeAtor);
         }
 
-        return filmesFiltrados;
+        return filmesFiltradosSemDuplicatas;
     }
 
     public void removerFilme(Integer id) throws Exception {

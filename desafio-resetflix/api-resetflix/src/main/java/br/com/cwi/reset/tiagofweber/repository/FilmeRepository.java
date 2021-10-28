@@ -11,5 +11,9 @@ import java.util.List;
 public interface FilmeRepository extends CrudRepository<Filme, Integer> {
 
     Filme findByNome(String nome);
+    List<Filme> findByNomeContainingIgnoreCase(String nomeFilme);
+    List<Filme> findByDiretorNomeContainingIgnoreCase(String nomeDiretor);
+    List<Filme> findByPersonagensNomePersonagemContainingIgnoreCase(String nomePersonagem);
+    List<Filme> findByPersonagensAtorNomeContainingIgnoreCase(String nomeAtor);
     List<Filme> findAll();
 }
